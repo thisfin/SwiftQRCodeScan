@@ -1,0 +1,313 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66FF0CFA1DD1787F00C16858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0CF91DD1787F00C16858 /* AppDelegate.swift */; };
+		66FF0CFC1DD1787F00C16858 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0CFB1DD1787F00C16858 /* ViewController.swift */; };
+		66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0D001DD1787F00C16858 /* Assets.xcassets */; };
+		66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */; };
+		66FF0D0E1DD17B4D00C16858 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */; };
+		66FF0D101DD181F100C16858 /* WYIconfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0F1DD181F100C16858 /* WYIconfont.swift */; };
+		66FF0D131DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0D121DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf */; };
+		66FF0D151DD2074600C16858 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D141DD2074600C16858 /* ShadowView.swift */; };
+		66FF0D171DD20DBF00C16858 /* UIColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D161DD20DBF00C16858 /* UIColorEx.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		66FF0CF61DD1787F00C16858 /* SwiftQRCodeScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftQRCodeScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FF0CF91DD1787F00C16858 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		66FF0CFB1DD1787F00C16858 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		66FF0D001DD1787F00C16858 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66FF0D051DD1787F00C16858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		66FF0D0F1DD181F100C16858 /* WYIconfont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYIconfont.swift; sourceTree = "<group>"; };
+		66FF0D121DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont_4.6.3.ttf"; path = "Resource/fontawesome-webfont_4.6.3.ttf"; sourceTree = "<group>"; };
+		66FF0D141DD2074600C16858 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		66FF0D161DD20DBF00C16858 /* UIColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorEx.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66FF0CF31DD1787F00C16858 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66FF0CED1DD1787F00C16858 = {
+			isa = PBXGroup;
+			children = (
+				66FF0CF81DD1787F00C16858 /* SwiftQRCodeScan */,
+				66FF0CF71DD1787F00C16858 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		66FF0CF71DD1787F00C16858 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66FF0CF61DD1787F00C16858 /* SwiftQRCodeScan.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66FF0CF81DD1787F00C16858 /* SwiftQRCodeScan */ = {
+			isa = PBXGroup;
+			children = (
+				66FF0D051DD1787F00C16858 /* Info.plist */,
+				66FF0CF91DD1787F00C16858 /* AppDelegate.swift */,
+				66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */,
+				66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */,
+				66FF0CFB1DD1787F00C16858 /* ViewController.swift */,
+				66FF0D0F1DD181F100C16858 /* WYIconfont.swift */,
+				66FF0D001DD1787F00C16858 /* Assets.xcassets */,
+				66FF0D111DD1EA1100C16858 /* Resource */,
+				66FF0D141DD2074600C16858 /* ShadowView.swift */,
+				66FF0D161DD20DBF00C16858 /* UIColorEx.swift */,
+			);
+			path = SwiftQRCodeScan;
+			sourceTree = "<group>";
+		};
+		66FF0D111DD1EA1100C16858 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				66FF0D121DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66FF0CF51DD1787F00C16858 /* SwiftQRCodeScan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66FF0D081DD1787F00C16858 /* Build configuration list for PBXNativeTarget "SwiftQRCodeScan" */;
+			buildPhases = (
+				66FF0CF21DD1787F00C16858 /* Sources */,
+				66FF0CF31DD1787F00C16858 /* Frameworks */,
+				66FF0CF41DD1787F00C16858 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftQRCodeScan;
+			productName = SwiftQRCodeScan;
+			productReference = 66FF0CF61DD1787F00C16858 /* SwiftQRCodeScan.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66FF0CEE1DD1787F00C16858 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = wenyou;
+				TargetAttributes = {
+					66FF0CF51DD1787F00C16858 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 2CQSW75266;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 66FF0CF11DD1787F00C16858 /* Build configuration list for PBXProject "SwiftQRCodeScan" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 66FF0CED1DD1787F00C16858;
+			productRefGroup = 66FF0CF71DD1787F00C16858 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66FF0CF51DD1787F00C16858 /* SwiftQRCodeScan */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66FF0CF41DD1787F00C16858 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */,
+				66FF0D131DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66FF0CF21DD1787F00C16858 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66FF0D171DD20DBF00C16858 /* UIColorEx.swift in Sources */,
+				66FF0D151DD2074600C16858 /* ShadowView.swift in Sources */,
+				66FF0CFC1DD1787F00C16858 /* ViewController.swift in Sources */,
+				66FF0CFA1DD1787F00C16858 /* AppDelegate.swift in Sources */,
+				66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */,
+				66FF0D101DD181F100C16858 /* WYIconfont.swift in Sources */,
+				66FF0D0E1DD17B4D00C16858 /* HistoryViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		66FF0D061DD1787F00C16858 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		66FF0D071DD1787F00C16858 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		66FF0D091DD1787F00C16858 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2CQSW75266;
+				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = win.opencode.SwiftQRCodeScan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		66FF0D0A1DD1787F00C16858 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2CQSW75266;
+				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = win.opencode.SwiftQRCodeScan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66FF0CF11DD1787F00C16858 /* Build configuration list for PBXProject "SwiftQRCodeScan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66FF0D061DD1787F00C16858 /* Debug */,
+				66FF0D071DD1787F00C16858 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66FF0D081DD1787F00C16858 /* Build configuration list for PBXNativeTarget "SwiftQRCodeScan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66FF0D091DD1787F00C16858 /* Debug */,
+				66FF0D0A1DD1787F00C16858 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66FF0CEE1DD1787F00C16858 /* Project object */;
+}
