@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66A6C6541DD2C50D0001F5FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6C6531DD2C50D0001F5FB /* Constants.swift */; };
+		66A6C6561DD2F3820001F5FB /* UsageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6C6551DD2F3820001F5FB /* UsageUtility.swift */; };
+		66A6C6581DD2FE960001F5FB /* HistoryDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6C6571DD2FE960001F5FB /* HistoryDataCache.swift */; };
+		66C6C7F03901D3338FF3DE06 /* Pods_SwiftQRCodeScan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FC3B9C63D250585668B2BD /* Pods_SwiftQRCodeScan.framework */; };
 		66FF0CFA1DD1787F00C16858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0CF91DD1787F00C16858 /* AppDelegate.swift */; };
-		66FF0CFC1DD1787F00C16858 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0CFB1DD1787F00C16858 /* ViewController.swift */; };
 		66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0D001DD1787F00C16858 /* Assets.xcassets */; };
 		66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */; };
 		66FF0D0E1DD17B4D00C16858 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */; };
@@ -19,9 +22,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57FC3B9C63D250585668B2BD /* Pods_SwiftQRCodeScan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRCodeScan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66A6C6531DD2C50D0001F5FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		66A6C6551DD2F3820001F5FB /* UsageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageUtility.swift; sourceTree = "<group>"; };
+		66A6C6571DD2FE960001F5FB /* HistoryDataCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryDataCache.swift; sourceTree = "<group>"; };
 		66FF0CF61DD1787F00C16858 /* SwiftQRCodeScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftQRCodeScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF0CF91DD1787F00C16858 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		66FF0CFB1DD1787F00C16858 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		66FF0D001DD1787F00C16858 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66FF0D051DD1787F00C16858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +36,8 @@
 		66FF0D121DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont_4.6.3.ttf"; path = "Resource/fontawesome-webfont_4.6.3.ttf"; sourceTree = "<group>"; };
 		66FF0D141DD2074600C16858 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		66FF0D161DD20DBF00C16858 /* UIColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorEx.swift; sourceTree = "<group>"; };
+		C8BC07E2905E150360FD14D4 /* Pods-SwiftQRCodeScan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRCodeScan.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRCodeScan/Pods-SwiftQRCodeScan.release.xcconfig"; sourceTree = "<group>"; };
+		D79A58883F84F247FFFEE579 /* Pods-SwiftQRCodeScan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRCodeScan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRCodeScan/Pods-SwiftQRCodeScan.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +45,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C6C7F03901D3338FF3DE06 /* Pods_SwiftQRCodeScan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		278A21724CE1CD19E3CD7743 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D79A58883F84F247FFFEE579 /* Pods-SwiftQRCodeScan.debug.xcconfig */,
+				C8BC07E2905E150360FD14D4 /* Pods-SwiftQRCodeScan.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4CD3B7814E2A613D2E14537B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57FC3B9C63D250585668B2BD /* Pods_SwiftQRCodeScan.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		66FF0CED1DD1787F00C16858 = {
 			isa = PBXGroup;
 			children = (
 				66FF0CF81DD1787F00C16858 /* SwiftQRCodeScan */,
 				66FF0CF71DD1787F00C16858 /* Products */,
+				278A21724CE1CD19E3CD7743 /* Pods */,
+				4CD3B7814E2A613D2E14537B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,14 +92,16 @@
 			children = (
 				66FF0D051DD1787F00C16858 /* Info.plist */,
 				66FF0CF91DD1787F00C16858 /* AppDelegate.swift */,
+				66A6C6531DD2C50D0001F5FB /* Constants.swift */,
+				66A6C6571DD2FE960001F5FB /* HistoryDataCache.swift */,
 				66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */,
 				66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */,
-				66FF0CFB1DD1787F00C16858 /* ViewController.swift */,
+				66FF0D141DD2074600C16858 /* ShadowView.swift */,
+				66FF0D161DD20DBF00C16858 /* UIColorEx.swift */,
+				66A6C6551DD2F3820001F5FB /* UsageUtility.swift */,
 				66FF0D0F1DD181F100C16858 /* WYIconfont.swift */,
 				66FF0D001DD1787F00C16858 /* Assets.xcassets */,
 				66FF0D111DD1EA1100C16858 /* Resource */,
-				66FF0D141DD2074600C16858 /* ShadowView.swift */,
-				66FF0D161DD20DBF00C16858 /* UIColorEx.swift */,
 			);
 			path = SwiftQRCodeScan;
 			sourceTree = "<group>";
@@ -91,9 +121,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66FF0D081DD1787F00C16858 /* Build configuration list for PBXNativeTarget "SwiftQRCodeScan" */;
 			buildPhases = (
+				94136ABD405BE317590B6DCA /* [CP] Check Pods Manifest.lock */,
 				66FF0CF21DD1787F00C16858 /* Sources */,
 				66FF0CF31DD1787F00C16858 /* Frameworks */,
 				66FF0CF41DD1787F00C16858 /* Resources */,
+				221A7508B39C2F8668CCC46B /* [CP] Embed Pods Frameworks */,
+				18A07661B76F30962980AC5B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -151,18 +184,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		18A07661B76F30962980AC5B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftQRCodeScan/Pods-SwiftQRCodeScan-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		221A7508B39C2F8668CCC46B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftQRCodeScan/Pods-SwiftQRCodeScan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94136ABD405BE317590B6DCA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		66FF0CF21DD1787F00C16858 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				66FF0D171DD20DBF00C16858 /* UIColorEx.swift in Sources */,
+				66A6C6581DD2FE960001F5FB /* HistoryDataCache.swift in Sources */,
 				66FF0D151DD2074600C16858 /* ShadowView.swift in Sources */,
-				66FF0CFC1DD1787F00C16858 /* ViewController.swift in Sources */,
 				66FF0CFA1DD1787F00C16858 /* AppDelegate.swift in Sources */,
 				66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */,
 				66FF0D101DD181F100C16858 /* WYIconfont.swift in Sources */,
 				66FF0D0E1DD17B4D00C16858 /* HistoryViewController.swift in Sources */,
+				66A6C6561DD2F3820001F5FB /* UsageUtility.swift in Sources */,
+				66A6C6541DD2C50D0001F5FB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +270,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -236,6 +320,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -262,27 +347,35 @@
 		};
 		66FF0D091DD1787F00C16858 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D79A58883F84F247FFFEE579 /* Pods-SwiftQRCodeScan.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2CQSW75266;
 				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = win.opencode.SwiftQRCodeScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		66FF0D0A1DD1787F00C16858 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8BC07E2905E150360FD14D4 /* Pods-SwiftQRCodeScan.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2CQSW75266;
 				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = win.opencode.SwiftQRCodeScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -8,17 +8,16 @@
 
 import UIKit
 
-
 class ShadowView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 80)
-        
+
+        backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 80)
+
         let outPath: UIBezierPath = UIBezierPath(rect: frame)
         let size = frame.size
         let width = size.width - 50 * 2
@@ -27,39 +26,35 @@ class ShadowView: UIView {
         outPath.usesEvenOddFillRule = true
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = outPath.cgPath
-        self.layer.mask = shapeLayer
+        layer.mask = shapeLayer
     }
-    
-    override func draw(_ rect: CGRect) {
-        
-    }
-//    - (void)drawRect:(CGRect)rect {
-//    const CGFloat lineWidth = 4;
-//    const CGFloat lineLenght = 20;
-//    
-//    CGSize size = self.frame.size;
-//    CGFloat width = size.width - 50 * 2;
-//    UIBezierPath *path = [UIBezierPath bezierPath];
-//    [COLOR_BIANCHI setStroke];
-//    [path setLineWidth:4];
-//    
-//    [path moveToPoint:CGPointMake(50 - lineWidth / 2, (size.height - width) / 2 + lineLenght)];
-//    [path addLineToPoint:CGPointMake(50 - lineWidth / 2, (size.height - width) / 2 - lineWidth / 2)];
-//    [path addLineToPoint:CGPointMake(50 - lineWidth / 2 + lineLenght, (size.height - width) / 2 - lineWidth / 2)];
-//    
-//    [path moveToPoint:CGPointMake(size.width - 50 - lineLenght, (size.height - width) / 2 - lineWidth / 2)];
-//    [path addLineToPoint:CGPointMake(size.width - 50 + lineWidth / 2, (size.height - width) / 2 - lineWidth / 2)];
-//    [path addLineToPoint:CGPointMake(size.width - 50 + lineWidth / 2, (size.height - width) / 2 + lineLenght)];
-//    
-//    [path moveToPoint:CGPointMake(size.width - 50 + lineWidth / 2, (size.height + width) / 2 - lineLenght)];
-//    [path addLineToPoint:CGPointMake(size.width - 50 + lineWidth / 2, (size.height + width) / 2 + lineWidth / 2)];
-//    [path addLineToPoint:CGPointMake(size.width - 50 - lineLenght, (size.height + width) / 2 + lineWidth / 2)];
-//    
-//    [path moveToPoint:CGPointMake(50 - lineWidth / 2 + lineLenght, (size.height + width) / 2 + lineWidth / 2)];
-//    [path addLineToPoint:CGPointMake(50 - lineWidth / 2, (size.height + width) / 2 + lineWidth / 2)];
-//    [path addLineToPoint:CGPointMake(50 - lineWidth / 2, (size.height + width) / 2 - lineLenght)];
-//    
-//    [path stroke];
-//    }
 
+    override func draw(_ rect: CGRect) {
+        let lineWidth: CGFloat = 4;
+        let lineLength: CGFloat = 20;
+
+        let size = frame.size;
+        let width: CGFloat = size.width - (CGFloat)(50 * 2)
+        let path = UIBezierPath()
+        Constants.colorBianchi.setStroke()
+        path.lineWidth = 4
+
+        path.move(to: CGPoint(x: 50 - lineWidth / 2, y: (size.height - width) / 2 + lineLength))
+        path.addLine(to: CGPoint(x: 50 - lineWidth / 2, y: (size.height - width) / 2 - lineWidth / 2))
+        path.addLine(to: CGPoint(x: 50 - lineWidth / 2 + lineLength, y: (size.height - width) / 2 - lineWidth / 2))
+
+        path.move(to: CGPoint(x: size.width - 50 - lineLength, y: (size.height - width) / 2 - lineWidth / 2))
+        path.addLine(to: CGPoint(x: size.width - 50 + lineWidth / 2, y: (size.height - width) / 2 - lineWidth / 2))
+        path.addLine(to: CGPoint(x: size.width - 50 + lineWidth / 2, y: (size.height - width) / 2 + lineLength))
+
+        path.move(to: CGPoint(x: size.width - 50 + lineWidth / 2, y: (size.height + width) / 2 - lineLength))
+        path.addLine(to: CGPoint(x: size.width - 50 + lineWidth / 2, y: (size.height + width) / 2 + lineWidth / 2))
+        path.addLine(to: CGPoint(x: size.width - 50 - lineLength, y: (size.height + width) / 2 + lineWidth / 2))
+
+        path.move(to: CGPoint(x: 50 - lineWidth / 2 + lineLength, y: (size.height + width) / 2 + lineWidth / 2))
+        path.addLine(to: CGPoint(x: 50 - lineWidth / 2, y: (size.height + width) / 2 + lineWidth / 2))
+        path.addLine(to: CGPoint(x: 50 - lineWidth / 2, y: (size.height + width) / 2 - lineLength))
+
+        path.stroke()
+    }
 }

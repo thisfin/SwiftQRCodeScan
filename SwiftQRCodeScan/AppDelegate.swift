@@ -16,23 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.screen = UIScreen.main
         
-        let tabBarController: UITabBarController = UITabBarController()
+        let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             {
-                let controller: ScanViewController = ScanViewController()
+                let controller = ScanViewController()
                 controller.title = "扫描";
-                controller.tabBarItem.image = WYIconfont.imageWithIcon(content: "\u{f029}", fontSize: 24)
+                controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontScan, fontSize: 24)
                 return controller;
             }(), {
-                let controller: HistoryViewController = HistoryViewController()
+                let controller = HistoryViewController()
                 controller.title = "历史";
                 controller.tabBarItem.image = nil
-                controller.tabBarItem.image = WYIconfont.imageWithIcon(content: "\u{f03a}", fontSize: 24)
-                let navController: UINavigationController = UINavigationController.init(rootViewController: controller)
+                controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontHistory, fontSize: 24)
+                let navController = UINavigationController(rootViewController: controller)
                 return navController
             }()]
         tabBarController.tabBar.barStyle = UIBarStyle.black
-        tabBarController.tabBar.tintColor = UIColor.blue
+        tabBarController.tabBar.tintColor = Constants.colorBianchi
         
         window?.rootViewController = tabBarController;
         window?.makeKeyAndVisible()

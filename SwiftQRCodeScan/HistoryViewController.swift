@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import AVFoundation
+import AudioToolbox
+
 
 class HistoryViewController: UIViewController {
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor.green
+        super.viewDidLoad()
+
+        view.backgroundColor = UIColor.red
     }
 }
