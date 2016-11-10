@@ -63,6 +63,12 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
+
+        view.addSubview({
+            let view = UIImageView(image: WYIconfont.imageWithIcon(content: Constants.iconfontScan, backgroundColor: UIColor.white, iconColor: Constants.colorBianchi, size: CGSize(width: 200, height: 200)))
+            view.frame = CGRect(x: 100, y: 200, width: 200, height: 200)
+            return view
+            }())
     }
 
     deinit {
@@ -106,7 +112,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         guard metadataObjects == nil || metadataObjects.count < 1 else {
             session.stopRunning()
             let metadataObject: AVMetadataMachineReadableCodeObject = metadataObjects.first as! AVMetadataMachineReadableCodeObject
-            //HistoryDataCache
+            HistoryDataCache.sharedInstance.addCacheValue(metadataObject.stringValue)
             ScanViewController.handleValue(metadataObject.stringValue, viewController: self, endBlock: {
                 self.session.startRunning()
             })
@@ -123,7 +129,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             let features: [CIFeature] = detector.features(in: ciImage)
             if features.count > 0 {
                 let feature: CIQRCodeFeature = features.first as! CIQRCodeFeature
-                // TODO:
+                HistoryDataCache.sharedInstance.addCacheValue(feature.messageString!)
                 ScanViewController.handleValue(feature.messageString!, viewController: self, endBlock: nil)
             } else {
                 self.present({
@@ -132,12 +138,12 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                     return controller
                 }(), animated: true, completion: nil)
             }
-            })
+        })
     }
 
     // MARK: - private
     private func initDevice() {
-        if device != nil {
+        if device == nil {
             device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
             let input = try! AVCaptureDeviceInput(device: device)
             let output = AVCaptureMetadataOutput()

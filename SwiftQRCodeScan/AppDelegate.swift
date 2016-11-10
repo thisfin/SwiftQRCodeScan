@@ -15,26 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.screen = UIScreen.main
-        
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [
-            {
-                let controller = ScanViewController()
-                controller.title = "扫描";
-                controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontScan, fontSize: 24)
-                return controller;
-            }(), {
-                let controller = HistoryViewController()
-                controller.title = "历史";
-                controller.tabBarItem.image = nil
-                controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontHistory, fontSize: 24)
-                let navController = UINavigationController(rootViewController: controller)
-                return navController
-            }()]
-        tabBarController.tabBar.barStyle = UIBarStyle.black
-        tabBarController.tabBar.tintColor = Constants.colorBianchi
-        
-        window?.rootViewController = tabBarController;
+        window?.rootViewController = {
+            let tabBarController = UITabBarController()
+            tabBarController.viewControllers = [
+                {
+                    let controller = ScanViewController()
+                    controller.title = "扫描";
+                    controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontScan, fontSize: 24)
+                    return controller;
+                }(), {
+                    let controller = HistoryViewController()
+                    controller.title = "历史";
+                    controller.tabBarItem.image = nil
+                    controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontHistory, fontSize: 24)
+                    let navController = UINavigationController(rootViewController: controller)
+                    return navController
+                }()]
+            tabBarController.tabBar.barStyle = UIBarStyle.black
+            tabBarController.tabBar.tintColor = Constants.colorBianchi
+            return tabBarController
+        }();
         window?.makeKeyAndVisible()
         return true
     }

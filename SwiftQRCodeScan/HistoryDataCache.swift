@@ -11,63 +11,49 @@ import Foundation
 class HistoryDataCache {
     private var cacheDirectoryPath: String
     private var cacheDatas: NSMutableArray
+    private static let selfInstance = HistoryDataCache.init()
 
-//    private static let selfInstance = HistoryDataCache.init()
-//
-//    public static var sharedInstance: HistoryDataCache {
-//        return selfInstance
-//    }
-//
-//    private init() {
-//        cacheDatas = NSMutableArray()
-//
-//        // 缓存目录创建
-//        let paths: [String] = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
-//        let cdPath = paths.first
-//        cacheDirectoryPath = NSURL(fileURLWithPath: cdPath).URLByAppendingPathComponent("LocalCache")
-//        if FileManager.default.fileExists(atPath: cacheDirectoryPath) {
-//            let tmpArray = nil
-//        }
-//
-//
-//            _cacheDatas = [NSMutableArray new];
-//
-//            // 缓存目录创建
-//            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//            NSString *cdPath = [paths firstObject];
-//            _cacheDirectoryPath = [cdPath stringByAppendingPathComponent:@"LocalCache"];
-//            if ([[NSFileManager defaultManager] fileExistsAtPath:_cacheDirectoryPath]) {
-//                NSMutableArray *tmpArray = [self readCacheFile];
-//                if (tmpArray.count) {
-//                    _cacheDatas = tmpArray;
-//                }
-//            } else {
-//                [[NSFileManager defaultManager] createDirectoryAtPath:_cacheDirectoryPath withIntermediateDirectories:NO attributes:nil error:nil];
-//            }
-//        }
-//        return self;
-//    }
+    public static var sharedInstance: HistoryDataCache {
+        return selfInstance
+    }
 
-//#pragma mark - public
-//- (void)addCacheValue:(NSString *)value {
-//    [_cacheDatas insertObject:value atIndex:0];
-//    [self writeCacheFile];
-//    }
-//
-//    - (void)deleteCacheValueAtIndex:(NSUInteger)index {
-//        [_cacheDatas removeObjectAtIndex:index];
-//        [self writeCacheFile];
-//        }
-//
-//        - (void)deleteAllCacheValue {
-//            [_cacheDatas removeAllObjects];
-//            [self removeCacheFile];
-//            }
-//
-//            - (NSArray *)getCacheValues {
-//                return _cacheDatas;
-//}
+    private init() {
+        cacheDatas = NSMutableArray()
 
+        // 缓存目录创建
+        let paths: [String] = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
+        let cdPath = paths.first
+
+        cacheDirectoryPath = (NSURL(fileURLWithPath: cdPath!).appendingPathComponent("LocalCache")?.path)!
+        if FileManager.default.fileExists(atPath: cacheDirectoryPath) {
+            let tmpArray = readCacheFile()
+            if tmpArray.count > 0 {
+                cacheDatas = tmpArray
+            }
+        } else {
+            try! FileManager.default.createDirectory(atPath: cacheDirectoryPath, withIntermediateDirectories: false, attributes: [:]);
+        }
+    }
+
+    // MARK: - public
+    public func addCacheValue(_ value: String) {
+        cacheDatas.insert(value, at: 0)
+        writeCacheFile()
+    }
+
+    public func deleteCacheValue(atIndex index: Int) {
+        cacheDatas.removeObject(at: index)
+        writeCacheFile()
+    }
+
+    public func deleteCacheValueAll() {
+        cacheDatas.removeAllObjects()
+        removeCacheFile()
+    }
+
+    public func getCacheValues() -> NSArray {
+        return cacheDatas
+    }
 
     // MARK: - private
     private func fileName() -> String {
@@ -85,50 +71,27 @@ class HistoryDataCache {
         return NSMutableArray()
     }
 
-    private func writeCacheFile() -> Void {
+    private func writeCacheFile() {
         weak var weakSelf = self
         DispatchQueue.main.async {
-            let filePath = weakSelf?.fileName()
+            let filePath: String? = weakSelf?.fileName()
             if (weakSelf?.cacheDatas.count)! > 0 {
-
+                let data: Data = try! JSONSerialization.data(withJSONObject: weakSelf?.cacheDatas as Any, options: .prettyPrinted)
+                if FileManager.default.fileExists(atPath: filePath!) {
+                    try! data.write(to: URL(fileURLWithPath: filePath!), options: .atomic)
+                } else {
+                    FileManager.default.createFile(atPath: filePath!, contents: data, attributes: [:])
+                }
+            } else {
+                try! FileManager.default.removeItem(atPath: filePath!)
             }
         }
     }
 
-    private func removeCacheFile() -> Void {
+    private func removeCacheFile() {
         weak var weakSelf = self
         DispatchQueue.main.async {
             try! FileManager.default.removeItem(atPath: (weakSelf?.fileName())!)
         }
     }
-
-    - (NSMutableArray *)readCacheFile {
-        NSString *filePath = [self fileName];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) { // 文件是否存在
-            NSData *data = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:nil];
-            if(data && data.length){
-                NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                return [[NSMutableArray alloc] initWithArray:array];
-            }
-        }
-        return [NSMutableArray new];
-        }
-
-        - (void)writeCacheFile {
-            __weak typeof(self) weakSelf = self;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                __strong typeof(self) strongSelf = weakSelf;
-                NSString *filePath = [weakSelf fileName];
-                if (strongSelf->_cacheDatas.count) { // 是否有数据
-                    NSData *data = [NSJSONSerialization dataWithJSONObject:_cacheDatas options:NSJSONWritingPrettyPrinted error:nil];
-                    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) { // 文件是否存在
-                        [data writeToFile:filePath options:NSDataWritingAtomic error:nil];
-                    } else {
-                        [[NSFileManager defaultManager] createFileAtPath:filePath contents:data attributes:nil];
-                    }
-                } else {
-                    [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-                }
-                });
-            }
 }

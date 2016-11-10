@@ -17,20 +17,24 @@ class WYIconfont: NSObject {
     private static var oneTimeThing: () = {
         let frameworkBundle: Bundle = Bundle(for: WYIconfont.classForCoder())
         let path: String? = frameworkBundle.path(forResource: WYIconfont.fontPath, ofType: "ttf")
-        let dynamicFontData: NSData? = NSData(contentsOfFile: path!)
-        if dynamicFontData == nil {
-            return
-        }
-        let dataProvider: CGDataProvider? = CGDataProvider(data: dynamicFontData!)
-        let font: CGFont? = CGFont(dataProvider!)
-        var error: Unmanaged<CFError>? = nil
+        if let dynamicFontData = NSData(contentsOfFile: path!) {
+            let dataProvider: CGDataProvider? = CGDataProvider(data: dynamicFontData)
+            let font: CGFont? = CGFont(dataProvider!)
+            var error: Unmanaged<CFError>? = nil
 
-        if (CTFontManagerRegisterGraphicsFont(font!, &error) == false) {
-            let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue());
-            NSLog("Failed to load font: %@", errorDescription as String);
+            if !CTFontManagerRegisterGraphicsFont(font!, &error) {
+                let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue());
+                NSLog("Failed to load font: %@", errorDescription as String);
+            }
+            error?.release();
         }
-        error?.release();
     }();
+
+    // MARK: - public
+    public static func setFont(fontPath: String, fontName: String) {
+        WYIconfont.fontPath = fontPath
+        WYIconfont.fontName = fontName
+    }
 
     public static func fontOfSize(_ fontSize: CGFloat) -> UIFont {
         _ = oneTimeThing
@@ -40,96 +44,53 @@ class WYIconfont: NSObject {
         return font!
     }
 
-    public static func setFont(fontPath: String, fontName: String) {
-        WYIconfont.fontPath = fontPath
-        WYIconfont.fontName = fontName
-    }
-
     public static func imageWithIcon(content: String, backgroundColor: UIColor = UIColor.clear, iconColor: UIColor = UIColor.white, size: CGSize) -> UIImage {
+        // 逐步缩小算字号
+        var fontSize: Int!
+        let constraintSize = CGSize(width: size.width, height: CGFloat(MAXFLOAT))
+        for i in stride(from: 500, to: 5, by: -2) {
+            let rect = content.boundingRect(with: constraintSize,
+                                            options: NSStringDrawingOptions.usesFontLeading,
+                                            attributes: [NSFontAttributeName: WYIconfont.fontOfSize(CGFloat(i))],
+                                            context: nil)
+            fontSize = i;
+            if rect.size.height <= size.height {
+                break;
+            }
+        }
+        // 绘制
+        let textRext = CGRect(origin: CGPoint.zero, size: size)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
-
-        var textRext: CGRect = CGRect.zero
-        textRext.size = size
-
-        let path: UIBezierPath = UIBezierPath(rect: textRext)
         backgroundColor.setFill()
-        path.fill()
-
-        let fontSize = size.width;
-        let font = WYIconfont.fontOfSize(fontSize)
-
-        //        @autoreleasepool {
-        //            UILabel *label = [UILabel new];
-        //            label.font = font;
-        //            label.text = content;
-        //            fontSize = [WYIconfont constraintLabelToSize:label size:size maxFontSize:500 minFontSize:5];
-        //            font = label.font;
-        //        }
-        iconColor.setFill()
-
-        let style: NSMutableParagraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        style.alignment = NSTextAlignment.center
-
-        content.draw(in:textRext, withAttributes: [NSFontAttributeName: font,
+        UIBezierPath(rect: textRext).fill()
+        content.draw(in:textRext, withAttributes: [NSFontAttributeName: WYIconfont.fontOfSize(CGFloat(fontSize)),
                                                    NSForegroundColorAttributeName: iconColor,
                                                    NSBackgroundColorAttributeName: backgroundColor,
-                                                   NSParagraphStyleAttributeName: style
-            ])
-
+                                                   NSParagraphStyleAttributeName: {
+                                                    let style = NSMutableParagraphStyle()
+                                                    style.alignment = NSTextAlignment.center
+                                                    return style}()])
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return image!;
     }
 
-    private static func constraintLabelToSize(label: UILabel, size: CGSize, maxFontSize: CGFloat, minFontSize: CGFloat) -> CGFloat {
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        label.frame = rect
-
-        var fontSize = maxFontSize
-
-        let constraintSize = CGSize(width: label.frame.size.width, height: CGFloat(MAXFLOAT))
-
-        repeat {
-            label.font = WYIconfont.fontOfSize(fontSize)
-            let textRect = label.text?.boundingRect(with: constraintSize,
-                                                    options: NSStringDrawingOptions.usesFontLeading,
-                                                    attributes: [NSFontAttributeName: label.font],
-                                                    context: nil)
-
-            if ((textRect?.size.height)! <= label.frame.size.height) {
-                break;
-            }
-            fontSize -= 2;
-        } while fontSize > minFontSize
-
-        return fontSize
-    }
-
     public static func imageWithIcon(content: String, backgroundColor: UIColor = UIColor.clear, iconColor: UIColor = UIColor.white, fontSize: CGFloat) -> UIImage {
-        let font = WYIconfont.fontOfSize(fontSize)
-        let style: NSMutableParagraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        style.alignment = NSTextAlignment.center
-
-        let attributes = [NSFontAttributeName : font,
-                          NSForegroundColorAttributeName : iconColor,
-                          NSBackgroundColorAttributeName : backgroundColor,
-                          NSParagraphStyleAttributeName: style]
+        let attributes = [NSFontAttributeName: WYIconfont.fontOfSize(fontSize),
+                          NSForegroundColorAttributeName: iconColor,
+                          NSBackgroundColorAttributeName: backgroundColor,
+                          NSParagraphStyleAttributeName: {
+                            let style = NSMutableParagraphStyle()
+                            style.alignment = NSTextAlignment.center
+                            return style}()]
 
         var size = content.size(attributes: attributes)
         size = CGSize(width: size.width * 1.1, height: size.height * 1.05)
 
-        var textRext: CGRect = CGRect.zero
-        textRext.size = size
-        let origin = CGPoint(x: size.width * 0.05, y: size.height * 0.025)
-
         UIGraphicsBeginImageContextWithOptions(size, false, 0);
-
-        let path = UIBezierPath(rect: textRext)
         backgroundColor.setFill()
-        path.fill()
-
-        content.draw(at: origin, withAttributes: attributes);
-
+        UIBezierPath(rect: CGRect(origin: CGPoint.zero, size: size)).fill()
+        content.draw(at: CGPoint(x: size.width * 0.05, y: size.height * 0.025), withAttributes: attributes);
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return image!;

@@ -21,7 +21,7 @@ class ShadowView: UIView {
         let outPath: UIBezierPath = UIBezierPath(rect: frame)
         let size = frame.size
         let width = size.width - 50 * 2
-        let inPath = UIBezierPath(rect: CGRect.init(x: 50, y: (size.height - width) / 2, width: width, height: width))
+        let inPath = UIBezierPath(rect: CGRect.init(x: 50, y: (size.height - width) / 2, width: width, height: width)).reversing()
         outPath.append(inPath)
         outPath.usesEvenOddFillRule = true
         let shapeLayer = CAShapeLayer()

@@ -11,7 +11,6 @@ import UIKit
 typealias SimpleBlockNoneParameter = () -> Void
 typealias SimpleBlock = (_ data: AnyObject) -> Void
 
-
 class Constants {
     public static let colorBianchi = UIColor.colorWithHexValue(0x8bddd1)
 
