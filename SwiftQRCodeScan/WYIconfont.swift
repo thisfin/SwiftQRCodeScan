@@ -14,6 +14,7 @@ class WYIconfont: NSObject {
     private static var fontName = "FontAwesome";
     private static var fontPath = "fontawesome-webfont_4.6.3";
 
+    // once范例
     private static var oneTimeThing: () = {
         let frameworkBundle: Bundle = Bundle(for: WYIconfont.classForCoder())
         let path: String? = frameworkBundle.path(forResource: WYIconfont.fontPath, ofType: "ttf")

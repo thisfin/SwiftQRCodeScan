@@ -13,6 +13,7 @@ class HistoryDataCache {
     private var cacheDatas: NSMutableArray
     private static let selfInstance = HistoryDataCache.init()
 
+    // 单例范例
     public static var sharedInstance: HistoryDataCache {
         return selfInstance
     }

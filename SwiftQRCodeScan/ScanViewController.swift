@@ -63,12 +63,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
-
-        view.addSubview({
-            let view = UIImageView(image: WYIconfont.imageWithIcon(content: Constants.iconfontScan, backgroundColor: UIColor.white, iconColor: Constants.colorBianchi, size: CGSize(width: 200, height: 200)))
-            view.frame = CGRect(x: 100, y: 200, width: 200, height: 200)
-            return view
-            }())
     }
 
     deinit {
@@ -216,6 +210,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         }
     }
 
+    // MARK: - public
     static func handleValue(_ value: String, viewController: UIViewController, endBlock: SimpleBlockNoneParameter!) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         viewController.present({
