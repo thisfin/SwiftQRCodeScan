@@ -53,6 +53,7 @@ extension UIColor {
             })
             string = s
         }
+        // string = string.characters.reduce("", {$0 + String($1) + String($1)})
 
         var i32: UInt32 = 0;
         let scanner = Scanner(string: string)
