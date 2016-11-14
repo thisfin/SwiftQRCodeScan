@@ -5,6 +5,7 @@ use_frameworks!
 
 def pods
     pod 'SnapKit'
+    pod 'Toast-Swift'
 end
 
 target 'SwiftQRCodeScan' do

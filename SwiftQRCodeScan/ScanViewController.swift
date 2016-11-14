@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import AudioToolbox
 import SnapKit
+import Toast_Swift
 
 class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     private var device: AVCaptureDevice!
@@ -116,11 +117,14 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 
     // MARK: - UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) -> Void {
+        picker.view.makeToastActivity(.center)
+        let pickImage: UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        let ciImage: CIImage = CIImage(data: UIImagePNGRepresentation(pickImage)!)!
+        let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])!
+        let features: [CIFeature] = detector.features(in: ciImage)
+        picker.view.hideToastActivity()
+
         picker.dismiss(animated: true, completion: {
-            let pickImage: UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
-            let ciImage: CIImage = CIImage(data: UIImagePNGRepresentation(pickImage)!)!
-            let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])!
-            let features: [CIFeature] = detector.features(in: ciImage)
             if features.count > 0 {
                 let feature: CIQRCodeFeature = features.first as! CIQRCodeFeature
                 HistoryDataCache.sharedInstance.addCacheValue(feature.messageString!)
