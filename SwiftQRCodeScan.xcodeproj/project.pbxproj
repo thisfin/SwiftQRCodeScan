@@ -149,7 +149,7 @@
 				TargetAttributes = {
 					66FF0CF51DD1787F00C16858 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = C5F44K29U6;
+						DevelopmentTeam = CY25956VB2;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -351,11 +351,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C5F44K29U6;
+				DEVELOPMENT_TEAM = CY25956VB2;
 				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = win.opencode.SwiftQRCodeScan;
+				PRODUCT_BUNDLE_IDENTIFIER = win.sourcecode.SwiftQRCodeScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -368,11 +368,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C5F44K29U6;
+				DEVELOPMENT_TEAM = CY25956VB2;
 				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = win.opencode.SwiftQRCodeScan;
+				PRODUCT_BUNDLE_IDENTIFIER = win.sourcecode.SwiftQRCodeScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
