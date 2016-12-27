@@ -32,7 +32,7 @@ class HistoryDataCache {
                 cacheDatas = tmpArray
             }
         } else {
-            try! FileManager.default.createDirectory(atPath: cacheDirectoryPath, withIntermediateDirectories: false, attributes: [:]);
+            try! FileManager.default.createDirectory(atPath: cacheDirectoryPath, withIntermediateDirectories: false, attributes: [:])
         }
     }
 

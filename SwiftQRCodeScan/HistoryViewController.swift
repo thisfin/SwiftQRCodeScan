@@ -18,7 +18,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
 
         self.automaticallyAdjustsScrollViewInsets = false               // scrollView遮挡
         self.navigationController?.navigationBar.isTranslucent = false  // navigation遮挡
-//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//        self.edgesForExtendedLayout = UIRectEdgeNone
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: {
             let button = UIButton(type: .custom)
@@ -27,7 +27,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             button.setTitle(Constants.iconfontDelete, for: .normal)
             button.setTitleColor(UIColor.black, for: .normal)
             button.addTarget(self, action: #selector(deleteButtonClicked(_:)), for: .touchUpInside)
-            return button;
+            return button
         }())
 
         tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -57,12 +57,12 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             cell = UITableViewCell(style: .value1, reuseIdentifier: "")
         }
         cell?.textLabel?.text = HistoryDataCache.sharedInstance.getCacheValues().object(at: indexPath.row) as? String
-        return cell!;
+        return cell!
     }
 
     // MARK: - UITableViewDelegate
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true;
+        return true
     }
 
     public func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {

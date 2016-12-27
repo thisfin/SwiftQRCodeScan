@@ -20,12 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBarController.viewControllers = [
                 {
                     let controller = ScanViewController()
-                    controller.title = "扫描";
+                    controller.title = "扫描"
                     controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontScan, fontSize: 24)
-                    return controller;
+                    return controller
                 }(), {
                     let controller = HistoryViewController()
-                    controller.title = "历史";
+                    controller.title = "历史"
                     controller.tabBarItem.image = nil
                     controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontHistory, fontSize: 24)
                     let navController = UINavigationController(rootViewController: controller)
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBarController.tabBar.barStyle = UIBarStyle.black
             tabBarController.tabBar.tintColor = Constants.colorBianchi
             return tabBarController
-        }();
+        }()
         window?.makeKeyAndVisible()
         return true
     }

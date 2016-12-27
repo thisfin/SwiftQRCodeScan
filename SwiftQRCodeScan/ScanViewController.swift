@@ -36,8 +36,8 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         view.addSubview(shadowView)
 
         let imageButton = UIButton(type: .custom)
-        imageButton.layer.cornerRadius = 20;
-        imageButton.clipsToBounds = true;
+        imageButton.layer.cornerRadius = 20
+        imageButton.clipsToBounds = true
         imageButton.titleLabel?.font = WYIconfont.fontOfSize(20)
         imageButton.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
         imageButton.setTitle(Constants.iconfontImage, for: .normal)
@@ -233,7 +233,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             }))
             controller.addAction(UIAlertAction(title: "继续", style: .cancel, handler: { (action: UIAlertAction) in
                 if endBlock != nil {
-                    endBlock();
+                    endBlock()
                 }
             }))
             return controller

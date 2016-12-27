@@ -11,8 +11,8 @@ import CoreText
 import UIKit
 
 class WYIconfont: NSObject {
-    private static var fontName = "FontAwesome";
-    private static var fontPath = "fontawesome-webfont_4.6.3";
+    private static var fontName = "FontAwesome"
+    private static var fontPath = "fontawesome-webfont_4.6.3"
 
     // once范例
     private static var oneTimeThing: () = {
@@ -24,12 +24,12 @@ class WYIconfont: NSObject {
             var error: Unmanaged<CFError>? = nil
 
             if !CTFontManagerRegisterGraphicsFont(font!, &error) {
-                let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue());
-                NSLog("Failed to load font: %@", errorDescription as String);
+                let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue())
+                NSLog("Failed to load font: %@", errorDescription as String)
             }
-            error?.release();
+            error?.release()
         }
-    }();
+    }()
 
     // MARK: - public
     public static func setFont(fontPath: String, fontName: String) {
@@ -54,9 +54,9 @@ class WYIconfont: NSObject {
                                             options: NSStringDrawingOptions.usesFontLeading,
                                             attributes: [NSFontAttributeName: WYIconfont.fontOfSize(CGFloat(i))],
                                             context: nil)
-            fontSize = i;
+            fontSize = i
             if rect.size.height <= size.height {
-                break;
+                break
             }
         }
         // 绘制
@@ -71,9 +71,9 @@ class WYIconfont: NSObject {
                                                     let style = NSMutableParagraphStyle()
                                                     style.alignment = NSTextAlignment.center
                                                     return style}()])
-        let image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return image!;
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
     }
 
     public static func imageWithIcon(content: String, backgroundColor: UIColor = UIColor.clear, iconColor: UIColor = UIColor.white, fontSize: CGFloat) -> UIImage {
@@ -88,12 +88,12 @@ class WYIconfont: NSObject {
         var size = content.size(attributes: attributes)
         size = CGSize(width: size.width * 1.1, height: size.height * 1.05)
 
-        UIGraphicsBeginImageContextWithOptions(size, false, 0);
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
         backgroundColor.setFill()
         UIBezierPath(rect: CGRect(origin: CGPoint.zero, size: size)).fill()
-        content.draw(at: CGPoint(x: size.width * 0.05, y: size.height * 0.025), withAttributes: attributes);
-        let image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return image!;
+        content.draw(at: CGPoint(x: size.width * 0.05, y: size.height * 0.025), withAttributes: attributes)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
     }
 }

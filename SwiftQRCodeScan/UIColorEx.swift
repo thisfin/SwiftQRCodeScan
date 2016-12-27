@@ -55,7 +55,7 @@ extension UIColor {
         }
         // string = string.characters.reduce("", {$0 + String($1) + String($1)})
 
-        var i32: UInt32 = 0;
+        var i32: UInt32 = 0
         let scanner = Scanner(string: string)
         scanner.scanHexInt32(&i32)
 

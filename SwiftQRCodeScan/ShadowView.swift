@@ -30,10 +30,10 @@ class ShadowView: UIView {
     }
 
     override func draw(_ rect: CGRect) {
-        let lineWidth: CGFloat = 4;
-        let lineLength: CGFloat = 20;
+        let lineWidth: CGFloat = 4
+        let lineLength: CGFloat = 20
 
-        let size = frame.size;
+        let size = frame.size
         let width: CGFloat = size.width - (CGFloat)(50 * 2)
         let path = UIBezierPath()
         Constants.colorBianchi.setStroke()
