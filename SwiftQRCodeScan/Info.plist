@@ -27,7 +27,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要您的同意才能获取图片</string>
 	<key>UILaunchStoryboardName</key>
-	<string></string>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

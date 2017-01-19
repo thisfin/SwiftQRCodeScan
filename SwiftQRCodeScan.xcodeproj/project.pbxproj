@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6690F5861E3116A5005FD0BF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */; };
 		66A6C6541DD2C50D0001F5FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6C6531DD2C50D0001F5FB /* Constants.swift */; };
 		66A6C6561DD2F3820001F5FB /* UsageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6C6551DD2F3820001F5FB /* UsageUtility.swift */; };
 		66A6C6581DD2FE960001F5FB /* HistoryDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6C6571DD2FE960001F5FB /* HistoryDataCache.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		57FC3B9C63D250585668B2BD /* Pods_SwiftQRCodeScan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRCodeScan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		66A6C6531DD2C50D0001F5FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		66A6C6551DD2F3820001F5FB /* UsageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageUtility.swift; sourceTree = "<group>"; };
 		66A6C6571DD2FE960001F5FB /* HistoryDataCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryDataCache.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				66FF0D051DD1787F00C16858 /* Info.plist */,
+				6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */,
 				66FF0CF91DD1787F00C16858 /* AppDelegate.swift */,
 				66A6C6531DD2C50D0001F5FB /* Constants.swift */,
 				66A6C6571DD2FE960001F5FB /* HistoryDataCache.swift */,
@@ -177,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6690F5861E3116A5005FD0BF /* Launch Screen.storyboard in Resources */,
 				66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */,
 				66FF0D131DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf in Resources */,
 			);
