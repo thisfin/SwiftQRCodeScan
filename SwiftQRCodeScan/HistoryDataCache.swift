@@ -92,7 +92,9 @@ class HistoryDataCache {
     private func removeCacheFile() {
         weak var weakSelf = self
         DispatchQueue.main.async {
-            try! FileManager.default.removeItem(atPath: (weakSelf?.fileName())!)
+            if FileManager.default.fileExists(atPath: (weakSelf?.fileName())!) {
+                try! FileManager.default.removeItem(atPath: (weakSelf?.fileName())!)
+            }
         }
     }
 }
