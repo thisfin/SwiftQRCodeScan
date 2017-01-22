@@ -1,4 +1,7 @@
 # SwiftQRCodeScan
 iOS Swift 扫码
 
-完成度: 95% 缺icon
+* todo
+    - 扫码动画
+    - 优化包大小!!!
+    - webview?
