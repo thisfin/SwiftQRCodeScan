@@ -5,3 +5,4 @@ iOS Swift 扫码
     - 扫码动画
     - webview?
     - 引导页优化
+    - i18n
