@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AudioToolbox
+import WYKit
 
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var tableView: UITableView!

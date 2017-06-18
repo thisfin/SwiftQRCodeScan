@@ -11,6 +11,7 @@ import AVFoundation
 import AudioToolbox
 import SnapKit
 import Toast_Swift
+import WYKit
 
 class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     private var device: AVCaptureDevice!

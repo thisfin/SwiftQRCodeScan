@@ -16,10 +16,7 @@
 		66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0D001DD1787F00C16858 /* Assets.xcassets */; };
 		66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */; };
 		66FF0D0E1DD17B4D00C16858 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */; };
-		66FF0D101DD181F100C16858 /* WYIconfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0F1DD181F100C16858 /* WYIconfont.swift */; };
-		66FF0D131DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0D121DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf */; };
 		66FF0D151DD2074600C16858 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D141DD2074600C16858 /* ShadowView.swift */; };
-		66FF0D171DD20DBF00C16858 /* UIColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D161DD20DBF00C16858 /* UIColorEx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +31,7 @@
 		66FF0D051DD1787F00C16858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
-		66FF0D0F1DD181F100C16858 /* WYIconfont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYIconfont.swift; sourceTree = "<group>"; };
-		66FF0D121DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont_4.6.3.ttf"; path = "Resource/fontawesome-webfont_4.6.3.ttf"; sourceTree = "<group>"; };
 		66FF0D141DD2074600C16858 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		66FF0D161DD20DBF00C16858 /* UIColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorEx.swift; sourceTree = "<group>"; };
 		C8BC07E2905E150360FD14D4 /* Pods-SwiftQRCodeScan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRCodeScan.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRCodeScan/Pods-SwiftQRCodeScan.release.xcconfig"; sourceTree = "<group>"; };
 		D79A58883F84F247FFFEE579 /* Pods-SwiftQRCodeScan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftQRCodeScan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftQRCodeScan/Pods-SwiftQRCodeScan.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,9 +94,7 @@
 				66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */,
 				66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */,
 				66FF0D141DD2074600C16858 /* ShadowView.swift */,
-				66FF0D161DD20DBF00C16858 /* UIColorEx.swift */,
 				66A6C6551DD2F3820001F5FB /* UsageUtility.swift */,
-				66FF0D0F1DD181F100C16858 /* WYIconfont.swift */,
 				66FF0D001DD1787F00C16858 /* Assets.xcassets */,
 				66FF0D111DD1EA1100C16858 /* Resource */,
 			);
@@ -112,7 +104,6 @@
 		66FF0D111DD1EA1100C16858 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				66FF0D121DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -182,7 +173,6 @@
 			files = (
 				6690F5861E3116A5005FD0BF /* Launch Screen.storyboard in Resources */,
 				66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */,
-				66FF0D131DD1EA1E00C16858 /* fontawesome-webfont_4.6.3.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +221,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -241,12 +231,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66FF0D171DD20DBF00C16858 /* UIColorEx.swift in Sources */,
 				66A6C6581DD2FE960001F5FB /* HistoryDataCache.swift in Sources */,
 				66FF0D151DD2074600C16858 /* ShadowView.swift in Sources */,
 				66FF0CFA1DD1787F00C16858 /* AppDelegate.swift in Sources */,
 				66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */,
-				66FF0D101DD181F100C16858 /* WYIconfont.swift in Sources */,
 				66FF0D0E1DD17B4D00C16858 /* HistoryViewController.swift in Sources */,
 				66A6C6561DD2F3820001F5FB /* UsageUtility.swift in Sources */,
 				66A6C6541DD2C50D0001F5FB /* Constants.swift in Sources */,
@@ -353,7 +341,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D79A58883F84F247FFFEE579 /* Pods-SwiftQRCodeScan.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CY25956VB2;
 				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
@@ -370,7 +358,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8BC07E2905E150360FD14D4 /* Pods-SwiftQRCodeScan.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CY25956VB2;
 				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;

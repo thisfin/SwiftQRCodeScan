@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WYKit
 
 class ShadowView: UIView {
     required init?(coder aDecoder: NSCoder) {
