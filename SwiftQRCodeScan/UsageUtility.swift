@@ -16,7 +16,7 @@ class UsageUtility {
     }
 
     public static func isAVAuthorization() -> Bool {
-        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         return !(authStatus == .restricted || authStatus == .denied)
     }
 

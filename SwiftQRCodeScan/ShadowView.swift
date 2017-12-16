@@ -14,13 +14,14 @@ class ShadowView: UIView {
         super.init(coder: aDecoder)
     }
 
+    // TODO: init 和 draw 中的 size 不同, 暂且用 screen 的 size 来做计算
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 80)
 
         let outPath: UIBezierPath = UIBezierPath(rect: frame)
-        let size = frame.size
+        let size = UIScreen.main.bounds.size // frame.size
         let width = size.width - 50 * 2
         let inPath = UIBezierPath(rect: CGRect.init(x: 50, y: (size.height - width) / 2, width: width, height: width)).reversing()
         outPath.append(inPath)
@@ -34,7 +35,7 @@ class ShadowView: UIView {
         let lineWidth: CGFloat = 4
         let lineLength: CGFloat = 20
 
-        let size = frame.size
+        let size = UIScreen.main.bounds.size // frame.size
         let width: CGFloat = size.width - (CGFloat)(50 * 2)
         let path = UIBezierPath()
         Constants.colorBianchi.setStroke()

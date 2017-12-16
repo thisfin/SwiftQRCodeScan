@@ -11,15 +11,16 @@ import AVFoundation
 import AudioToolbox
 import WYKit
 
-class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HistoryViewController: UIViewController {
     private var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.automaticallyAdjustsScrollViewInsets = false               // scrollView遮挡
-        self.navigationController?.navigationBar.isTranslucent = false  // navigation遮挡
-//        self.edgesForExtendedLayout = UIRectEdgeNone
+//        self.automaticallyAdjustsScrollViewInsets = false               // scrollView 遮挡
+        self.navigationController?.navigationBar.isTranslucent = false  // navigation 遮挡
+        self.tabBarController?.tabBar.isTranslucent = false             // tabbar 遮挡
+//        self.edgesForExtendedLayout = []
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: {
             let button = UIButton(type: .custom)
@@ -36,7 +37,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.view)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view)
+                make.left.equalTo(self.view)
+                make.right.equalTo(self.view)
+                make.bottom.equalTo(self.view.safeAreaInsets.bottom)
+            } else {
+                make.edges.equalTo(self.view)
+            }
         }
     }
 
@@ -45,14 +53,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
 
         tableView.reloadData()
     }
+}
 
-    // MARK: - UITableViewDataSource
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension HistoryViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return HistoryDataCache.sharedInstance.getCacheValues().count
 
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "")
         if cell == nil {
             cell = UITableViewCell(style: .value1, reuseIdentifier: "")
@@ -60,8 +69,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         cell?.textLabel?.text = HistoryDataCache.sharedInstance.getCacheValues().object(at: indexPath.row) as? String
         return cell!
     }
+}
 
-    // MARK: - UITableViewDelegate
+extension HistoryViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -78,9 +88,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ScanViewController.handleValue(HistoryDataCache.sharedInstance.getCacheValues().object(at: indexPath.row) as! String, viewController: self, endBlock: nil)
     }
+}
 
-    // MARK: - private
-    @objc private func deleteButtonClicked(_ sender: AnyObject) {
+@objc extension HistoryViewController {
+    private func deleteButtonClicked(_ sender: AnyObject) {
         self.present({
             let controller = UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .alert)
             controller.addAction(UIAlertAction(title: "确定", style: .default, handler: { (action) in

@@ -41,6 +41,12 @@
       "idiom" : "iphone",
       "filename" : "qs_180.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "qs_1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

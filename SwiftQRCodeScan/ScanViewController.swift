@@ -13,7 +13,7 @@ import SnapKit
 import Toast_Swift
 import WYKit
 
-class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ScanViewController: UIViewController, UINavigationControllerDelegate {
     private var device: AVCaptureDevice!
     private var session: AVCaptureSession!
     private var bgView: UIView!
@@ -24,17 +24,31 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        self.edgesForExtendedLayout = []
+        self.tabBarController?.tabBar.isTranslucent = false
+
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
-        bgView = UIView(frame: view.bounds)
-        bgView.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        bgView = UIView()
         bgView.backgroundColor = UIColor.black
         bgView.isHidden = true
         view.addSubview(bgView)
+        bgView.snp.makeConstraints { (maker) in
+            if #available(iOS 11.0, *) {
+                maker.top.equalTo(self.view)
+                maker.left.equalTo(self.view)
+                maker.right.equalTo(self.view)
+                maker.bottom.equalTo(self.view.safeAreaInsets.bottom)
+            } else {
+                maker.edges.equalTo(self.view)
+            }
+        }
 
         let shadowView = ShadowView.init(frame: view.bounds)
-        shadowView.autoresizingMask = UIViewAutoresizing.flexibleHeight
         view.addSubview(shadowView)
+        shadowView.snp.makeConstraints { (maker) in
+            maker.edges.equalTo(bgView)
+        }
 
         let imageButton = UIButton(type: .custom)
         imageButton.layer.cornerRadius = 20
@@ -46,7 +60,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         shadowView.addSubview(imageButton)
         imageButton.snp.makeConstraints { (make) in
             make.right.equalTo(shadowView).offset(-20)
-            make.bottom.equalTo(shadowView).offset(-20 - 48)
+            make.bottom.equalTo(shadowView).offset(-20)
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
@@ -103,52 +117,15 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         return .lightContent
     }
 
-    // MARK: - AVCaptureMetadataOutputObjectsDelegate
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-        guard metadataObjects == nil || metadataObjects.count < 1 else {
-            session.stopRunning()
-            let metadataObject: AVMetadataMachineReadableCodeObject = metadataObjects.first as! AVMetadataMachineReadableCodeObject
-            HistoryDataCache.sharedInstance.addCacheValue(metadataObject.stringValue)
-            ScanViewController.handleValue(metadataObject.stringValue, viewController: self, endBlock: {
-                self.session.startRunning()
-            })
-            return
-        }
-    }
-
-    // MARK: - UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) -> Void {
-        picker.view.makeToastActivity(.center)
-        let pickImage: UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        let ciImage: CIImage = CIImage(data: UIImagePNGRepresentation(pickImage)!)!
-        let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])!
-        let features: [CIFeature] = detector.features(in: ciImage)
-        picker.view.hideToastActivity()
-
-        picker.dismiss(animated: true, completion: {
-            if features.count > 0 {
-                let feature: CIQRCodeFeature = features.first as! CIQRCodeFeature
-                HistoryDataCache.sharedInstance.addCacheValue(feature.messageString!)
-                ScanViewController.handleValue(feature.messageString!, viewController: self, endBlock: nil)
-            } else {
-                self.present({
-                    let controller = UIAlertController(title: "该图片识别不出二维码", message: nil, preferredStyle: .alert)
-                    controller.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
-                    return controller
-                }(), animated: true, completion: nil)
-            }
-        })
-    }
-
     // MARK: - private
     private func initDevice() {
         if device == nil {
-            device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+            device = AVCaptureDevice.default(for: AVMediaType.video)
             let input = try! AVCaptureDeviceInput(device: device)
             let output = AVCaptureMetadataOutput()
             output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             session = AVCaptureSession()
-            session.sessionPreset = UIScreen.main.bounds.size.height < 500 ? AVCaptureSessionPreset640x480 : AVCaptureSessionPresetHigh
+            session.sessionPreset = UIScreen.main.bounds.size.height < 500 ? AVCaptureSession.Preset.vga640x480 : AVCaptureSession.Preset.high
             session.addInput(input)
             session.addOutput(output)
 
@@ -157,12 +134,12 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             var scanRect = CGRect(x: (windowSize.width - scanSize.width) / 2, y: (windowSize.height - scanSize.height) / 2, width: scanSize.width, height: scanSize.height)
             scanRect = CGRect(x: scanRect.origin.y / windowSize.height, y: scanRect.origin.x / windowSize.width, width: scanRect.size.height / windowSize.height, height: scanRect.size.width / windowSize.width) // 计算rectOfInterest 注意x, y交换位置
             output.rectOfInterest = scanRect
-            output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+            output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
 
             let layer = AVCaptureVideoPreviewLayer(session: session)
-            layer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            layer?.frame = UIScreen.main.bounds
-            view.layer.insertSublayer(layer!, at: 0)
+            layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            layer.frame = UIScreen.main.bounds
+            view.layer.insertSublayer(layer, at: 0)
         }
     }
 
@@ -177,41 +154,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         case .auto:
             lightButton.setTitleColor(UIColor.yellow, for: .normal)
             break
-        }
-    }
-
-    @objc private func lightButtonClicked(_ sender: AnyObject?) {
-        try! device.lockForConfiguration()
-        switch device.torchMode {
-        case .on:
-            device.torchMode = .off
-            break
-        case .off:
-            device.torchMode = .on
-            break
-        case .auto:
-            device.torchMode = .on
-        }
-        device.unlockForConfiguration()
-        setLightButtonStyle()
-    }
-
-    @objc private func applicationWillEnterForeground(_ notification: NSNotification) {
-        if supportCamera {
-            session.startRunning()
-        }
-    }
-
-    @objc private func imageButtonClicked(_ sender: AnyObject?) {
-        if UsageUtility.checkPhoto(controller: self) {
-            let controller = UIImagePickerController()
-            controller.delegate = self
-            // photoLibrary 相册; camera 相机; photosAlbum 照片库
-            controller.sourceType = .photoLibrary
-            controller.allowsEditing = true
-            controller.modalTransitionStyle = .crossDissolve
-            self.present(controller, animated: true, completion: nil)
-            //            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
 
@@ -239,5 +181,81 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             }))
             return controller
         }(), animated: true, completion: nil)
+    }
+}
+
+extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
+    func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        guard metadataObjects.count < 1 else {
+            session.stopRunning()
+            let metadataObject: AVMetadataMachineReadableCodeObject = metadataObjects.first as! AVMetadataMachineReadableCodeObject
+            HistoryDataCache.sharedInstance.addCacheValue(metadataObject.stringValue!)
+            ScanViewController.handleValue(metadataObject.stringValue!, viewController: self, endBlock: {
+                self.session.startRunning()
+            })
+            return
+        }
+    }
+}
+
+extension ScanViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) -> Void {
+        picker.view.makeToastActivity(.center)
+        let pickImage: UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        let ciImage: CIImage = CIImage(data: UIImagePNGRepresentation(pickImage)!)!
+        let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])!
+        let features: [CIFeature] = detector.features(in: ciImage)
+        picker.view.hideToastActivity()
+
+        picker.dismiss(animated: true, completion: {
+            if features.count > 0 {
+                let feature: CIQRCodeFeature = features.first as! CIQRCodeFeature
+                HistoryDataCache.sharedInstance.addCacheValue(feature.messageString!)
+                ScanViewController.handleValue(feature.messageString!, viewController: self, endBlock: nil)
+            } else {
+                self.present({
+                    let controller = UIAlertController(title: "该图片识别不出二维码", message: nil, preferredStyle: .alert)
+                    controller.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                    return controller
+                }(), animated: true, completion: nil)
+            }
+        })
+    }
+}
+
+@objc extension ScanViewController {
+    private func lightButtonClicked(_ sender: AnyObject?) {
+        try! device.lockForConfiguration()
+        switch device.torchMode {
+        case .on:
+            device.torchMode = .off
+            break
+        case .off:
+            device.torchMode = .on
+            break
+        case .auto:
+            device.torchMode = .on
+        }
+        device.unlockForConfiguration()
+        setLightButtonStyle()
+    }
+
+    private func applicationWillEnterForeground(_ notification: NSNotification) {
+        if supportCamera {
+            session.startRunning()
+        }
+    }
+
+    private func imageButtonClicked(_ sender: AnyObject?) {
+        if UsageUtility.checkPhoto(controller: self) {
+            let controller = UIImagePickerController()
+            controller.delegate = self
+            // photoLibrary 相册; camera 相机; photosAlbum 照片库
+            controller.sourceType = .photoLibrary
+            controller.allowsEditing = true
+            controller.modalTransitionStyle = .crossDissolve
+            self.present(controller, animated: true, completion: nil)
+            //            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }

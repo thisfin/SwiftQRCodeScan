@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
 //        window = UIWindow(frame: UIScreen.main.bounds)
         window?.screen = UIScreen.main
+        window?.backgroundColor = .white
         window?.rootViewController = {
             let tabBarController = UITabBarController()
             tabBarController.viewControllers = [
