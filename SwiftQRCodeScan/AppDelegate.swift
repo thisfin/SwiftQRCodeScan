@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Then
 import WYKit
 
 @UIApplicationMain
@@ -14,46 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow()
-//        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.screen = UIScreen.main
-        window?.backgroundColor = .white
-        window?.rootViewController = {
-            let tabBarController = UITabBarController()
-            tabBarController.viewControllers = [
-                {
-                    let controller = ScanViewController()
-                    controller.title = "扫描"
-                    controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontScan, fontSize: 24)
-                    return controller
-                }(), {
-                    let controller = HistoryViewController()
-                    controller.title = "历史"
-                    controller.tabBarItem.image = nil
-                    controller.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontHistory, fontSize: 24)
-                    let navController = UINavigationController(rootViewController: controller)
-                    return navController
-                }()]
-            tabBarController.tabBar.barStyle = UIBarStyle.black
-            tabBarController.tabBar.tintColor = Constants.colorBianchi
-            return tabBarController
-        }()
-        window?.makeKeyAndVisible()
+        window = UIWindow().then {
+            $0.screen = UIScreen.main
+            $0.backgroundColor = .white
+            $0.rootViewController = UITabBarController().then {
+                $0.tabBar.barStyle = .black
+                $0.tabBar.tintColor = Constants.colorBianchi
+                $0.viewControllers = [
+                    ScanViewController().then {
+                        $0.title = "扫描"
+                        $0.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontScan, fontSize: 24)
+                    },
+                    UINavigationController(rootViewController: HistoryViewController().then {
+                        $0.title = "历史"
+                        $0.tabBarItem.image = WYIconfont.imageWithIcon(content: Constants.iconfontHistory, fontSize: 24)
+                    })]
+            }
+            $0.makeKeyAndVisible()
+        }
         return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
     }
 }

@@ -18,5 +18,5 @@ class Constants {
     public static let iconfontHistory = "\u{f03a}"
     public static let iconfontlight = "\u{f0e7}"
     public static let iconfontImage = "\u{f03e}"
-    public static let iconfontDelete = "\u{f014}"
+    public static let iconfontDelete = "\u{f2ed}"
 }
