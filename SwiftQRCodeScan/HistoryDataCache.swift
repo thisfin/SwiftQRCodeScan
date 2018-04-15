@@ -9,8 +9,8 @@
 import Foundation
 
 class HistoryDataCache {
-    private var cacheDirectoryPath: String
-    private var cacheDatas: NSMutableArray
+    private var cacheDirectoryPath: String?
+    private var cacheDatas = [String]()
     private static let selfInstance = HistoryDataCache.init()
 
     // 单例范例
@@ -19,20 +19,18 @@ class HistoryDataCache {
     }
 
     private init() {
-        cacheDatas = NSMutableArray()
-
         // 缓存目录创建
         let paths: [String] = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
-        let cdPath = paths.first
-
-        cacheDirectoryPath = (NSURL(fileURLWithPath: cdPath!).appendingPathComponent("LocalCache")?.path)!
-        if FileManager.default.fileExists(atPath: cacheDirectoryPath) {
-            let tmpArray = readCacheFile()
-            if tmpArray.count > 0 {
-                cacheDatas = tmpArray
+        if let cdPath = paths.first, let path = NSURL(fileURLWithPath: cdPath).appendingPathComponent("LocalCache")?.path {
+            cacheDirectoryPath = path
+            if FileManager.default.fileExists(atPath: path) {
+                let tmpArray = readCacheFile()
+                if tmpArray.count > 0 {
+                    cacheDatas = tmpArray
+                }
+            } else {
+                try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: [:])
             }
-        } else {
-            try! FileManager.default.createDirectory(atPath: cacheDirectoryPath, withIntermediateDirectories: false, attributes: [:])
         }
     }
 
@@ -43,57 +41,65 @@ class HistoryDataCache {
     }
 
     public func deleteCacheValue(atIndex index: Int) {
-        cacheDatas.removeObject(at: index)
+        cacheDatas.remove(at: index)
         writeCacheFile()
     }
 
     public func deleteCacheValueAll() {
-        cacheDatas.removeAllObjects()
+        cacheDatas.removeAll()
         removeCacheFile()
     }
 
-    public func getCacheValues() -> NSArray {
+    public func getCacheValues() -> [String] {
         return cacheDatas
     }
 
     // MARK: - private
-    private func fileName() -> String {
-        return cacheDirectoryPath + "/HistoryCacheData.data"
+    private func fileName() -> String? {
+        if let path = cacheDirectoryPath {
+            return path + "/HistoryCacheData.data"
+        }
+        return nil
     }
 
-    private func readCacheFile() -> NSMutableArray {
-        if FileManager.default.fileExists(atPath: fileName()) {
-            let data: Data = try! Data(contentsOf: URL(fileURLWithPath: fileName()), options: .mappedIfSafe)
-            if data.count > 0 {
-                let array: NSArray = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! NSArray
-                return NSMutableArray(array: array)
-            }
+    private func readCacheFile() -> [String] {
+        if let fileName = fileName(),
+            FileManager.default.fileExists(atPath: fileName),
+            let data: Data = try? Data(contentsOf: URL(fileURLWithPath: fileName), options: .mappedIfSafe),
+            data.count > 0,
+            let array = (try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String] {
+            return array
         }
-        return NSMutableArray()
+        return []
     }
 
     private func writeCacheFile() {
-        weak var weakSelf = self
-        DispatchQueue.main.async {
-            let filePath: String? = weakSelf?.fileName()
-            if (weakSelf?.cacheDatas.count)! > 0 {
-                let data: Data = try! JSONSerialization.data(withJSONObject: weakSelf?.cacheDatas as Any, options: .prettyPrinted)
-                if FileManager.default.fileExists(atPath: filePath!) {
-                    try! data.write(to: URL(fileURLWithPath: filePath!), options: .atomic)
+        DispatchQueue.main.async { [weak self] () in
+            guard let strongSelf = self else {
+                return
+            }
+            if let filePath = strongSelf.fileName() {
+                let cacheDatas = strongSelf.cacheDatas
+                if cacheDatas.count > 0, let data: Data = try? JSONSerialization.data(withJSONObject: cacheDatas, options: .prettyPrinted) {
+                    if FileManager.default.fileExists(atPath: filePath) {
+                        try? data.write(to: URL(fileURLWithPath: filePath), options: .atomic)
+                    } else {
+                        FileManager.default.createFile(atPath: filePath, contents: data, attributes: [:])
+                    }
                 } else {
-                    FileManager.default.createFile(atPath: filePath!, contents: data, attributes: [:])
+                    try? FileManager.default.removeItem(atPath: filePath)
                 }
-            } else {
-                try! FileManager.default.removeItem(atPath: filePath!)
             }
         }
     }
 
     private func removeCacheFile() {
-        weak var weakSelf = self
-        DispatchQueue.main.async {
-            if FileManager.default.fileExists(atPath: (weakSelf?.fileName())!) {
-                try! FileManager.default.removeItem(atPath: (weakSelf?.fileName())!)
+        DispatchQueue.main.async { [weak self] () in
+            guard let strongSelf = self else {
+                return
+            }
+            if let fileName = strongSelf.fileName(), FileManager.default.fileExists(atPath: fileName) {
+                try? FileManager.default.removeItem(atPath: fileName)
             }
         }
     }

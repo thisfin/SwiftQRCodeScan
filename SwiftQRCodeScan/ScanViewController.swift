@@ -12,6 +12,9 @@ import AudioToolbox
 import SnapKit
 import Toast_Swift
 import WYKit
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 class ScanViewController: UIViewController, UINavigationControllerDelegate {
     private var device: AVCaptureDevice!
@@ -24,39 +27,51 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.edgesForExtendedLayout = []
         self.tabBarController?.tabBar.isTranslucent = false
 
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.rx.notification(Notification.Name.UIApplicationWillEnterForeground).subscribe(onNext: { (notification) in
+            if self.supportCamera {
+                self.session.startRunning()
+            }
+        }).disposed(by: rx.disposeBag)
 
-        bgView = UIView()
-        bgView.backgroundColor = UIColor.black
-        bgView.isHidden = true
+        bgView = UIView().then {
+            $0.backgroundColor = .black
+            $0.isHidden = true
+        }
         view.addSubview(bgView)
         bgView.snp.makeConstraints { (maker) in
             if #available(iOS 11.0, *) {
-                maker.top.equalTo(self.view)
-                maker.left.equalTo(self.view)
-                maker.right.equalTo(self.view)
+                maker.top.left.right.equalTo(self.view)
                 maker.bottom.equalTo(self.view.safeAreaInsets.bottom)
             } else {
                 maker.edges.equalTo(self.view)
             }
         }
 
-        let shadowView = ShadowView.init(frame: view.bounds)
+        let shadowView = ShadowView(frame: view.bounds)
         view.addSubview(shadowView)
         shadowView.snp.makeConstraints { (maker) in
             maker.edges.equalTo(bgView)
         }
 
-        let imageButton = UIButton(type: .custom)
-        imageButton.layer.cornerRadius = 20
-        imageButton.clipsToBounds = true
-        imageButton.titleLabel?.font = WYIconfont.fontOfSize(20)
-        imageButton.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
-        imageButton.setTitle(Constants.iconfontImage, for: .normal)
-        imageButton.addTarget(self, action: #selector(imageButtonClicked(_:)), for: .touchUpInside)
+        let imageButton = UIButton(type: .custom).then {
+            $0.layer.cornerRadius = 20
+            $0.clipsToBounds = true
+            $0.titleLabel?.font = WYIconfont.fontOfSize(20)
+            $0.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
+            $0.setTitle(Constants.iconfontImage, for: .normal)
+            $0.rx.tap.subscribe(onNext: { () in
+                if UsageUtility.checkPhoto(controller: self) {
+                    self.present(UIImagePickerController().then {
+                        $0.delegate = self
+                        $0.sourceType = .photoLibrary // photoLibrary 相册; camera 相机; photosAlbum 照片库
+                        $0.allowsEditing = true
+                        $0.modalTransitionStyle = .crossDissolve
+                    }, animated: true, completion: nil)
+                }
+            }).disposed(by: rx.disposeBag)
+        }
         shadowView.addSubview(imageButton)
         imageButton.snp.makeConstraints { (make) in
             make.right.equalTo(shadowView).offset(-20)
@@ -65,13 +80,28 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
             make.height.equalTo(40)
         }
 
-        lightButton = UIButton(type: .custom)
-        lightButton.layer.cornerRadius = 20
-        lightButton.clipsToBounds = true
-        lightButton.titleLabel?.font = WYIconfont.fontOfSize(20)
-        lightButton.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
-        lightButton.setTitle(Constants.iconfontlight, for: .normal)
-        lightButton.addTarget(self, action: #selector(lightButtonClicked(_:)), for: .touchUpInside)
+        lightButton = UIButton(type: .custom).then {
+            $0.layer.cornerRadius = 20
+            $0.clipsToBounds = true
+            $0.titleLabel?.font = WYIconfont.fontOfSize(20)
+            $0.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
+            $0.setTitle(Constants.iconfontlight, for: .normal)
+            $0.rx.tap.subscribe(onNext: { () in
+                try! self.device.lockForConfiguration()
+                switch self.device.torchMode {
+                case .on:
+                    self.device.torchMode = .off
+                    break
+                case .off:
+                    self.device.torchMode = .on
+                    break
+                case .auto:
+                    self.device.torchMode = .on
+                }
+                self.device.unlockForConfiguration()
+                self.setLightButtonStyle()
+            }).disposed(by: rx.disposeBag)
+        }
         shadowView.addSubview(lightButton)
         lightButton.snp.makeConstraints { (make) in
             make.right.equalTo(imageButton.snp.left).offset(-20)
@@ -79,10 +109,6 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -108,7 +134,7 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if session != nil {
+        if let session = session {
             session.stopRunning()
         }
     }
@@ -158,29 +184,26 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     // MARK: - public
-    static func handleValue(_ value: String, viewController: UIViewController, endBlock: SimpleBlockNoneParameter!) {
+    static func handleValue(_ value: String, viewController: UIViewController, endBlock: (() -> Void)?) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        viewController.present({
-            let controller = UIAlertController(title: value, message: nil, preferredStyle: .actionSheet)
-            if UIApplication.shared.canOpenURL(URL(string: value)!) {
-                controller.addAction(UIAlertAction(title: "用浏览器打开", style: .default, handler: { (action: UIAlertAction) in
-                    UIApplication.shared.open(URL(string: value)!, options: [:], completionHandler: nil)
+        viewController.present(UIAlertController(title: value, message: nil, preferredStyle: .actionSheet).then {
+            if let url = URL(string: value), UIApplication.shared.canOpenURL(url) {
+                $0.addAction(UIAlertAction(title: "用浏览器打开", style: .default, handler: { (action) in
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }))
             }
-            controller.addAction(UIAlertAction(title: "拷贝到剪贴板", style: .default, handler: { (action: UIAlertAction) in
-                let pasteboard = UIPasteboard.general
-                pasteboard.string = value
-                if endBlock != nil {
-                    endBlock()
+            $0.addAction(UIAlertAction(title: "拷贝到剪贴板", style: .default, handler: { (action) in
+                UIPasteboard.general.string = value
+                if let block = endBlock {
+                    block()
                 }
             }))
-            controller.addAction(UIAlertAction(title: "继续", style: .cancel, handler: { (action: UIAlertAction) in
-                if endBlock != nil {
-                    endBlock()
+            $0.addAction(UIAlertAction(title: "继续", style: .cancel, handler: { (action) in
+                if let block = endBlock {
+                    block()
                 }
             }))
-            return controller
-        }(), animated: true, completion: nil)
+        }, animated: true, completion: nil)
     }
 }
 
@@ -190,8 +213,11 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             session.stopRunning()
             let metadataObject: AVMetadataMachineReadableCodeObject = metadataObjects.first as! AVMetadataMachineReadableCodeObject
             HistoryDataCache.sharedInstance.addCacheValue(metadataObject.stringValue!)
-            ScanViewController.handleValue(metadataObject.stringValue!, viewController: self, endBlock: {
-                self.session.startRunning()
+            ScanViewController.handleValue(metadataObject.stringValue!, viewController: self, endBlock: { [weak self] () -> Void in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.session.startRunning()
             })
             return
         }
@@ -220,42 +246,5 @@ extension ScanViewController: UIImagePickerControllerDelegate {
                 }(), animated: true, completion: nil)
             }
         })
-    }
-}
-
-@objc extension ScanViewController {
-    private func lightButtonClicked(_ sender: AnyObject?) {
-        try! device.lockForConfiguration()
-        switch device.torchMode {
-        case .on:
-            device.torchMode = .off
-            break
-        case .off:
-            device.torchMode = .on
-            break
-        case .auto:
-            device.torchMode = .on
-        }
-        device.unlockForConfiguration()
-        setLightButtonStyle()
-    }
-
-    private func applicationWillEnterForeground(_ notification: NSNotification) {
-        if supportCamera {
-            session.startRunning()
-        }
-    }
-
-    private func imageButtonClicked(_ sender: AnyObject?) {
-        if UsageUtility.checkPhoto(controller: self) {
-            let controller = UIImagePickerController()
-            controller.delegate = self
-            // photoLibrary 相册; camera 相机; photosAlbum 照片库
-            controller.sourceType = .photoLibrary
-            controller.allowsEditing = true
-            controller.modalTransitionStyle = .crossDissolve
-            self.present(controller, animated: true, completion: nil)
-            //            self.navigationController?.pushViewController(controller, animated: true)
-        }
     }
 }

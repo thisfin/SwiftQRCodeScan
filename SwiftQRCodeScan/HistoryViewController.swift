@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 import AudioToolbox
 import WYKit
+import RxCocoa
+import RxSwift
+import RxDataSources
+
 
 class HistoryViewController: UIViewController {
     private var tableView: UITableView!
@@ -22,15 +26,27 @@ class HistoryViewController: UIViewController {
         self.tabBarController?.tabBar.isTranslucent = false             // tabbar 遮挡
 //        self.edgesForExtendedLayout = []
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: {
-            let button = UIButton(type: .custom)
-            button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-            button.titleLabel?.font = WYIconfont.fontOfSize(20)
-            button.setTitle(Constants.iconfontDelete, for: .normal)
-            button.setTitleColor(UIColor.black, for: .normal)
-            button.addTarget(self, action: #selector(deleteButtonClicked(_:)), for: .touchUpInside)
-            return button
-        }())
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .custom).then {
+            $0.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+            $0.titleLabel?.font = WYIconfont.fontOfSize(20)
+            $0.setTitle(Constants.iconfontDelete, for: .normal)
+            $0.setTitleColor(UIColor.black, for: .normal)
+            $0.rx.tap.subscribe(onNext: { [weak self] () in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.present(UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .alert).then {
+                    $0.addAction(UIAlertAction(title: "确定", style: .default, handler: { [weak self] (action) in
+                        guard let strongSelf = self else {
+                            return
+                        }
+                        HistoryDataCache.sharedInstance.deleteCacheValueAll()
+                        strongSelf.tableView.reloadData()
+                    }))
+                    $0.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+                }, animated: true, completion: nil)
+            }).disposed(by: rx.disposeBag)
+        })
 
         tableView = UITableView(frame: CGRect.zero, style: .plain)
         tableView.dataSource = self
@@ -46,6 +62,33 @@ class HistoryViewController: UIViewController {
                 make.edges.equalTo(self.view)
             }
         }
+
+//        let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, String>>(
+//            animationConfiguration: AnimationConfiguration(insertAnimation: .top, reloadAnimation: .fade, deleteAnimation: .fade),
+//            configureCell: { (dataSource, tableView, indexPath, element) -> UITableViewCell in
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "") ?? UITableViewCell(style: .value1, reuseIdentifier: "")
+//                if let label = cell.textLabel {
+//                    label.text = HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row]
+//                }
+//                return cell
+//        },titleForHeaderInSection: { (dataSource, indexPath) in return "aaa" },
+//          titleForFooterInSection: { (dataSource, indexPath) in return "bbb" },
+//            canEditRowAtIndexPath: { (dataSource, indexPath) -> Bool in
+//                return true
+//        })
+//
+//        let items = Observable.just([AnimatableSectionModel<String, String>(model: "", items: HistoryDataCache.sharedInstance.getCacheValues())])
+//        items.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: rx.disposeBag)
+//
+//        tableView.rx.itemSelected.subscribe(onNext: { (indexPath) in
+//            ScanViewController.handleValue(HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row], viewController: self, endBlock: nil)
+//        }).disposed(by: rx.disposeBag)
+//
+//
+//        tableView.rx.itemDeleted.subscribe(onNext: { (indexPath) in
+//            HistoryDataCache.sharedInstance.deleteCacheValue(atIndex: indexPath.row)
+////            self.tableView.deleteRows(at: [indexPath], with: .fade)
+//        }).disposed(by: rx.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +109,7 @@ extension HistoryViewController: UITableViewDataSource {
         if cell == nil {
             cell = UITableViewCell(style: .value1, reuseIdentifier: "")
         }
-        cell?.textLabel?.text = HistoryDataCache.sharedInstance.getCacheValues().object(at: indexPath.row) as? String
+        cell?.textLabel?.text = HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row]
         return cell!
     }
 }
@@ -86,20 +129,6 @@ extension HistoryViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ScanViewController.handleValue(HistoryDataCache.sharedInstance.getCacheValues().object(at: indexPath.row) as! String, viewController: self, endBlock: nil)
-    }
-}
-
-@objc extension HistoryViewController {
-    private func deleteButtonClicked(_ sender: AnyObject) {
-        self.present({
-            let controller = UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .alert)
-            controller.addAction(UIAlertAction(title: "确定", style: .default, handler: { (action) in
-                HistoryDataCache.sharedInstance.deleteCacheValueAll()
-                self.tableView.reloadData()
-            }))
-            controller.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-            return controller
-        }(), animated: true, completion: nil)
+        ScanViewController.handleValue(HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row], viewController: self, endBlock: nil)
     }
 }
