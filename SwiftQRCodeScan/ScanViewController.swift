@@ -16,7 +16,7 @@ import RxSwift
 import NSObject_Rx
 import WYKit
 
-class ScanViewController: UIViewController, UINavigationControllerDelegate {
+class ScanViewController: ViewController, UINavigationControllerDelegate {
     private var device: AVCaptureDevice!
     private var session: AVCaptureSession!
     private var bgView: UIView!
@@ -28,6 +28,7 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
         super.viewDidLoad()
 
         self.tabBarController?.tabBar.isTranslucent = false
+//        self.setNeedsStatusBarAppearanceUpdate()
 
         NotificationCenter.default.rx.notification(Notification.Name.UIApplicationWillEnterForeground).subscribe(onNext: { (notification) in
             if self.supportCamera {
@@ -37,22 +38,22 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
 
         bgView = UIView().then {
             $0.backgroundColor = .black
-            $0.isHidden = true
+            $0.isHidden = false
         }
         view.addSubview(bgView)
         bgView.snp.makeConstraints { (maker) in
+            maker.edges.equalToSuperview()
+        }
+
+        let shadowView = ShadowView(frame: view.bounds)
+        view.addSubview(shadowView)
+        shadowView.snp.makeConstraints { (maker) in
             if #available(iOS 11.0, *) {
                 maker.top.left.right.equalTo(self.view)
                 maker.bottom.equalTo(self.view.safeAreaInsets.bottom)
             } else {
                 maker.edges.equalTo(self.view)
             }
-        }
-
-        let shadowView = ShadowView(frame: view.bounds)
-        view.addSubview(shadowView)
-        shadowView.snp.makeConstraints { (maker) in
-            maker.edges.equalTo(bgView)
         }
 
         let imageButton = UIButton(type: .custom).then {
@@ -74,10 +75,8 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
         }
         shadowView.addSubview(imageButton)
         imageButton.snp.makeConstraints { (make) in
-            make.right.equalTo(shadowView).offset(-20)
-            make.bottom.equalTo(shadowView).offset(-20)
-            make.width.equalTo(40)
-            make.height.equalTo(40)
+            make.right.bottom.equalToSuperview().offset(-20)
+            make.height.width.equalTo(40)
         }
 
         lightButton = UIButton(type: .custom).then {
@@ -105,10 +104,17 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
         shadowView.addSubview(lightButton)
         lightButton.snp.makeConstraints { (make) in
             make.right.equalTo(imageButton.snp.left).offset(-20)
-            make.bottom.equalTo(imageButton)
-            make.width.equalTo(40)
-            make.height.equalTo(40)
+            make.bottom.height.width.equalTo(imageButton)
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // 隐藏 navigationBar
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.tintColor = .white
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -133,6 +139,9 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
 
         if let session = session {
             session.stopRunning()
