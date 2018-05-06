@@ -53,8 +53,9 @@ class HistoryDataCache {
     public func getCacheValues() -> [String] {
         return cacheDatas
     }
+}
 
-    // MARK: - private
+private extension HistoryDataCache {
     private func fileName() -> String? {
         if let path = cacheDirectoryPath {
             return path + "/HistoryCacheData.data"

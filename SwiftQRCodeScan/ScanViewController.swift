@@ -11,10 +11,10 @@ import AVFoundation
 import AudioToolbox
 import SnapKit
 import Toast_Swift
-import WYKit
 import RxCocoa
 import RxSwift
 import NSObject_Rx
+import WYKit
 
 class ScanViewController: UIViewController, UINavigationControllerDelegate {
     private var device: AVCaptureDevice!
@@ -58,9 +58,9 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
         let imageButton = UIButton(type: .custom).then {
             $0.layer.cornerRadius = 20
             $0.clipsToBounds = true
-            $0.titleLabel?.font = WYIconfont.fontOfSize(20)
+            $0.titleLabel?.font = Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont)
             $0.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
-            $0.setTitle(Constants.iconfontImage, for: .normal)
+            $0.setTitle("\u{f03e}", for: .normal)
             $0.rx.tap.subscribe(onNext: { () in
                 if UsageUtility.checkPhoto(controller: self) {
                     self.present(UIImagePickerController().then {
@@ -83,9 +83,9 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
         lightButton = UIButton(type: .custom).then {
             $0.layer.cornerRadius = 20
             $0.clipsToBounds = true
-            $0.titleLabel?.font = WYIconfont.fontOfSize(20)
+            $0.titleLabel?.font = Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont)
             $0.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
-            $0.setTitle(Constants.iconfontlight, for: .normal)
+            $0.setTitle("\u{f0e7}", for: .normal)
             $0.rx.tap.subscribe(onNext: { () in
                 try! self.device.lockForConfiguration()
                 switch self.device.torchMode {
@@ -143,7 +143,32 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
         return .lightContent
     }
 
-    // MARK: - private
+    static func handleValue(_ value: String, viewController: UIViewController, endBlock: (() -> Void)?) {
+        if UserDefaultsHelp.shared.shock {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        }
+        viewController.present(UIAlertController(title: value, message: nil, preferredStyle: .actionSheet).then {
+            if let url = URL(string: value), UIApplication.shared.canOpenURL(url) {
+                $0.addAction(UIAlertAction(title: "用浏览器打开", style: .default, handler: { (action) in
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }))
+            }
+            $0.addAction(UIAlertAction(title: "拷贝到剪贴板", style: .default, handler: { (action) in
+                UIPasteboard.general.string = value
+                if let block = endBlock {
+                    block()
+                }
+            }))
+            $0.addAction(UIAlertAction(title: "继续", style: .cancel, handler: { (action) in
+                if let block = endBlock {
+                    block()
+                }
+            }))
+        }, animated: true, completion: nil)
+    }
+}
+
+private extension ScanViewController {
     private func initDevice() {
         if device == nil {
             device = AVCaptureDevice.default(for: AVMediaType.video)
@@ -181,29 +206,6 @@ class ScanViewController: UIViewController, UINavigationControllerDelegate {
             lightButton.setTitleColor(UIColor.yellow, for: .normal)
             break
         }
-    }
-
-    // MARK: - public
-    static func handleValue(_ value: String, viewController: UIViewController, endBlock: (() -> Void)?) {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        viewController.present(UIAlertController(title: value, message: nil, preferredStyle: .actionSheet).then {
-            if let url = URL(string: value), UIApplication.shared.canOpenURL(url) {
-                $0.addAction(UIAlertAction(title: "用浏览器打开", style: .default, handler: { (action) in
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }))
-            }
-            $0.addAction(UIAlertAction(title: "拷贝到剪贴板", style: .default, handler: { (action) in
-                UIPasteboard.general.string = value
-                if let block = endBlock {
-                    block()
-                }
-            }))
-            $0.addAction(UIAlertAction(title: "继续", style: .cancel, handler: { (action) in
-                if let block = endBlock {
-                    block()
-                }
-            }))
-        }, animated: true, completion: nil)
     }
 }
 

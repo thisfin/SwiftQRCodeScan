@@ -9,33 +9,34 @@
 import UIKit
 import AVFoundation
 import AudioToolbox
-import WYKit
 import RxCocoa
 import RxSwift
 import RxDataSources
 
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: ViewController {
     private var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "扫描记录"
+
 //        self.automaticallyAdjustsScrollViewInsets = false               // scrollView 遮挡
-        self.navigationController?.navigationBar.isTranslucent = false  // navigation 遮挡
-        self.tabBarController?.tabBar.isTranslucent = false             // tabbar 遮挡
+//        self.navigationController?.navigationBar.isTranslucent = false  // navigation 遮挡
+//        self.tabBarController?.tabBar.isTranslucent = false             // tabbar 遮挡
 //        self.edgesForExtendedLayout = []
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .custom).then {
             $0.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-            $0.titleLabel?.font = WYIconfont.fontOfSize(20)
-            $0.setTitle(Constants.iconfontDelete, for: .normal)
+            $0.titleLabel?.font = Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont)
+            $0.setTitle("\u{f2ed}", for: .normal)
             $0.setTitleColor(UIColor.black, for: .normal)
             $0.rx.tap.subscribe(onNext: { [weak self] () in
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.present(UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .alert).then {
+                strongSelf.present(UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .actionSheet).then {
                     $0.addAction(UIAlertAction(title: "确定", style: .default, handler: { [weak self] (action) in
                         guard let strongSelf = self else {
                             return
@@ -48,69 +49,42 @@ class HistoryViewController: UIViewController {
             }).disposed(by: rx.disposeBag)
         })
 
-        tableView = UITableView(frame: CGRect.zero, style: .plain)
+        tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
         tableView.dataSource = self
         tableView.delegate = self
         self.view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view)
-                make.left.equalTo(self.view)
-                make.right.equalTo(self.view)
-                make.bottom.equalTo(self.view.safeAreaInsets.bottom)
-            } else {
-                make.edges.equalTo(self.view)
-            }
+        tableView.snp.makeConstraints { (maker) in
+            maker.edges.equalToSuperview()
         }
-
-//        let dataSource = RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, String>>(
-//            animationConfiguration: AnimationConfiguration(insertAnimation: .top, reloadAnimation: .fade, deleteAnimation: .fade),
-//            configureCell: { (dataSource, tableView, indexPath, element) -> UITableViewCell in
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "") ?? UITableViewCell(style: .value1, reuseIdentifier: "")
-//                if let label = cell.textLabel {
-//                    label.text = HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row]
-//                }
-//                return cell
-//        },titleForHeaderInSection: { (dataSource, indexPath) in return "aaa" },
-//          titleForFooterInSection: { (dataSource, indexPath) in return "bbb" },
-//            canEditRowAtIndexPath: { (dataSource, indexPath) -> Bool in
-//                return true
-//        })
-//
-//        let items = Observable.just([AnimatableSectionModel<String, String>(model: "", items: HistoryDataCache.sharedInstance.getCacheValues())])
-//        items.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: rx.disposeBag)
-//
-//        tableView.rx.itemSelected.subscribe(onNext: { (indexPath) in
-//            ScanViewController.handleValue(HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row], viewController: self, endBlock: nil)
-//        }).disposed(by: rx.disposeBag)
-//
-//
-//        tableView.rx.itemDeleted.subscribe(onNext: { (indexPath) in
-//            HistoryDataCache.sharedInstance.deleteCacheValue(atIndex: indexPath.row)
-////            self.tableView.deleteRows(at: [indexPath], with: .fade)
-//        }).disposed(by: rx.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         tableView.reloadData()
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        }
     }
 }
 
 extension HistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return HistoryDataCache.sharedInstance.getCacheValues().count
-
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "")
-        if cell == nil {
-            cell = UITableViewCell(style: .value1, reuseIdentifier: "")
-        }
-        cell?.textLabel?.text = HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row]
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "") ?? UITableViewCell(style: .value1, reuseIdentifier: "")
+        cell.textLabel?.text = HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row]
+        return cell
     }
 }
 

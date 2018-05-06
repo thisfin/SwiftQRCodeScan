@@ -10,10 +10,4 @@ import UIKit
 
 class Constants {
     static let colorBianchi = UIColor.colorWithHexValue(0x8bddd1)
-
-    static let iconfontScan = "\u{f029}"
-    static let iconfontHistory = "\u{f03a}"
-    static let iconfontlight = "\u{f0e7}"
-    static let iconfontImage = "\u{f03e}"
-    static let iconfontDelete = "\u{f2ed}"
 }
