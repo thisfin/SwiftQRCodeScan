@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66000426209F865000D4A6B9 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66000425209F865000D4A6B9 /* PreviewViewController.swift */; };
 		6690F5861E3116A5005FD0BF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */; };
 		669EDC36209F0954006BCDC8 /* GenerateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669EDC35209F0954006BCDC8 /* GenerateViewController.swift */; };
 		669EDC38209F1C83006BCDC8 /* UIViewController+Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669EDC37209F1C83006BCDC8 /* UIViewController+Help.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		57FC3B9C63D250585668B2BD /* Pods_SwiftQRCodeScan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRCodeScan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66000425209F865000D4A6B9 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		669EDC35209F0954006BCDC8 /* GenerateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateViewController.swift; sourceTree = "<group>"; };
 		669EDC37209F1C83006BCDC8 /* UIViewController+Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Help.swift"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				66C188A8209D6D5D0031136A /* IconFont.swift */,
 				66C188A4209C58D40031136A /* IndexViewController.swift */,
 				669EDC3B209F5147006BCDC8 /* Operators.swift */,
+				66000425209F865000D4A6B9 /* PreviewViewController.swift */,
 				66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */,
 				66C188A6209D4F720031136A /* SettingViewController.swift */,
 				66FF0D141DD2074600C16858 /* ShadowView.swift */,
@@ -281,6 +284,7 @@
 				66C188A5209C58D40031136A /* IndexViewController.swift in Sources */,
 				66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */,
 				66C188A9209D6D5D0031136A /* IconFont.swift in Sources */,
+				66000426209F865000D4A6B9 /* PreviewViewController.swift in Sources */,
 				66C188A7209D4F720031136A /* SettingViewController.swift in Sources */,
 				669EDC3E209F715C006BCDC8 /* UserDefaultsHelp.swift in Sources */,
 				669EDC3A209F1ECB006BCDC8 /* ViewController.swift in Sources */,
