@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class PreviewViewController: ViewController {
+    var image: UIImage?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
 
         self.navigationItem.rightBarButtonItems = [
             UIBarButtonItem(customView: UIButton(type: .custom).then {
@@ -58,7 +63,15 @@ class PreviewViewController: ViewController {
                     //                        $0.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
                     //                    }, animated: true, completion: nil)
                 }).disposed(by: rx.disposeBag)
-            })
-        ]
+            })]
+
+        if let image = self.image {
+            let imageView = UIImageView(image: image)
+            self.view.addSubview(imageView)
+            imageView.snp.makeConstraints { (maker) in
+                maker.center.width.equalToSuperview()
+                maker.height.equalTo(imageView.snp.width)
+            }
+        }
     }
 }

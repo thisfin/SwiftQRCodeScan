@@ -194,7 +194,7 @@ private extension ScanViewController {
             var scanRect = CGRect(x: (windowSize.width - scanSize.width) / 2, y: (windowSize.height - scanSize.height) / 2, width: scanSize.width, height: scanSize.height)
             scanRect = CGRect(x: scanRect.origin.y / windowSize.height, y: scanRect.origin.x / windowSize.width, width: scanRect.size.height / windowSize.height, height: scanRect.size.width / windowSize.width) // 计算rectOfInterest 注意x, y交换位置
             output.rectOfInterest = scanRect
-            output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+            output.metadataObjectTypes = [.qr, .ean13]
 
             let layer = AVCaptureVideoPreviewLayer(session: session)
             layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
