@@ -9,9 +9,8 @@
 import Foundation
 
 class UserDefaultsHelp {
-    private static let selfInstance = UserDefaultsHelp.init()
+    private static let selfInstance = UserDefaultsHelp()
 
-    // 单例范例
     public static var shared: UserDefaultsHelp {
         return selfInstance
     }

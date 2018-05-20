@@ -11,9 +11,10 @@ def pods
     pod 'RxDataSources',            '3.0.2'
     pod 'RxSwift',                  '4.1.2'
     pod 'SnapKit',                  '4.0.0'
+    pod 'SwiftyJSON',               '4.1.0'
     pod 'Then',                     '2.3.0'
     pod 'Toast-Swift',              '3.0.1'
-    pod 'WYKit',                    :path => '~/Documents/git/WYKit'
+    pod 'ChromaColorPicker',        '1.7'
 end
 
 target 'SwiftQRCodeScan' do

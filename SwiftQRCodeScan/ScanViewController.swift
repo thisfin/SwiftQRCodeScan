@@ -14,7 +14,6 @@ import Toast_Swift
 import RxCocoa
 import RxSwift
 import NSObject_Rx
-import WYKit
 
 class ScanViewController: ViewController, UINavigationControllerDelegate {
     private var device: AVCaptureDevice!
@@ -27,7 +26,6 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBarController?.tabBar.isTranslucent = false
 //        self.setNeedsStatusBarAppearanceUpdate()
 
         NotificationCenter.default.rx.notification(Notification.Name.UIApplicationWillEnterForeground).subscribe(onNext: { (notification) in
@@ -115,6 +113,7 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.isTranslucent = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -142,6 +141,7 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
 
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.isTranslucent = false
 
         if let session = session {
             session.stopRunning()
@@ -207,13 +207,10 @@ private extension ScanViewController {
         switch device.torchMode {
         case .on:
             lightButton.setTitleColor(UIColor.red, for: .normal)
-            break
         case .off:
             lightButton.setTitleColor(UIColor.white, for: .normal)
-            break
         case .auto:
             lightButton.setTitleColor(UIColor.yellow, for: .normal)
-            break
         }
     }
 }

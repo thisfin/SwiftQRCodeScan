@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		66000426209F865000D4A6B9 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66000425209F865000D4A6B9 /* PreviewViewController.swift */; };
+		6602019820B1E1A900FE764D /* UIColor+Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6602019720B1E1A900FE764D /* UIColor+Help.swift */; };
 		6690F5861E3116A5005FD0BF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */; };
 		669EDC36209F0954006BCDC8 /* GenerateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669EDC35209F0954006BCDC8 /* GenerateViewController.swift */; };
 		669EDC38209F1C83006BCDC8 /* UIViewController+Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669EDC37209F1C83006BCDC8 /* UIViewController+Help.swift */; };
@@ -23,6 +24,11 @@
 		66C188AC209D7AF30031136A /* fa-brands-400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66C188AA209D7AF30031136A /* fa-brands-400.ttf */; };
 		66C188AD209D7AF30031136A /* fa-solid-900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66C188AB209D7AF30031136A /* fa-solid-900.ttf */; };
 		66C6C7F03901D3338FF3DE06 /* Pods_SwiftQRCodeScan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FC3B9C63D250585668B2BD /* Pods_SwiftQRCodeScan.framework */; };
+		66CDD3C920A9C46D00E3D294 /* UIView+Rx+Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDD3C820A9C46D00E3D294 /* UIView+Rx+Help.swift */; };
+		66CDD3CB20A9CE8900E3D294 /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDD3CA20A9CE8900E3D294 /* ColorSelectViewController.swift */; };
+		66CDD3CD20A9E3BD00E3D294 /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 66CDD3CC20A9E3BD00E3D294 /* colors.json */; };
+		66CDD3CF20A9E4FB00E3D294 /* CTColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDD3CE20A9E4FB00E3D294 /* CTColorView.swift */; };
+		66CDD3D120A9EFF000E3D294 /* UIColor+ChineseTraditionalColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDD3D020A9EFF000E3D294 /* UIColor+ChineseTraditionalColors.swift */; };
 		66FF0CFA1DD1787F00C16858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0CF91DD1787F00C16858 /* AppDelegate.swift */; };
 		66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0D001DD1787F00C16858 /* Assets.xcassets */; };
 		66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */; };
@@ -33,6 +39,7 @@
 /* Begin PBXFileReference section */
 		57FC3B9C63D250585668B2BD /* Pods_SwiftQRCodeScan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftQRCodeScan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66000425209F865000D4A6B9 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		6602019720B1E1A900FE764D /* UIColor+Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Help.swift"; sourceTree = "<group>"; };
 		6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		669EDC35209F0954006BCDC8 /* GenerateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateViewController.swift; sourceTree = "<group>"; };
 		669EDC37209F1C83006BCDC8 /* UIViewController+Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Help.swift"; sourceTree = "<group>"; };
@@ -47,6 +54,11 @@
 		66C188A8209D6D5D0031136A /* IconFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconFont.swift; sourceTree = "<group>"; };
 		66C188AA209D7AF30031136A /* fa-brands-400.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands-400.ttf"; sourceTree = "<group>"; };
 		66C188AB209D7AF30031136A /* fa-solid-900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.ttf"; sourceTree = "<group>"; };
+		66CDD3C820A9C46D00E3D294 /* UIView+Rx+Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Rx+Help.swift"; sourceTree = "<group>"; };
+		66CDD3CA20A9CE8900E3D294 /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
+		66CDD3CC20A9E3BD00E3D294 /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
+		66CDD3CE20A9E4FB00E3D294 /* CTColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTColorView.swift; sourceTree = "<group>"; };
+		66CDD3D020A9EFF000E3D294 /* UIColor+ChineseTraditionalColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChineseTraditionalColors.swift"; sourceTree = "<group>"; };
 		66FF0CF61DD1787F00C16858 /* SwiftQRCodeScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftQRCodeScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF0CF91DD1787F00C16858 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66FF0D001DD1787F00C16858 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,7 +123,9 @@
 				66FF0D051DD1787F00C16858 /* Info.plist */,
 				6690F5851E3116A5005FD0BF /* Launch Screen.storyboard */,
 				66FF0CF91DD1787F00C16858 /* AppDelegate.swift */,
+				66CDD3CA20A9CE8900E3D294 /* ColorSelectViewController.swift */,
 				66A6C6531DD2C50D0001F5FB /* Constants.swift */,
+				66CDD3CE20A9E4FB00E3D294 /* CTColorView.swift */,
 				669EDC35209F0954006BCDC8 /* GenerateViewController.swift */,
 				66A6C6571DD2FE960001F5FB /* HistoryDataCache.swift */,
 				66FF0D0D1DD17B4D00C16858 /* HistoryViewController.swift */,
@@ -122,12 +136,15 @@
 				66FF0D0B1DD17AE800C16858 /* ScanViewController.swift */,
 				66C188A6209D4F720031136A /* SettingViewController.swift */,
 				66FF0D141DD2074600C16858 /* ShadowView.swift */,
+				66CDD3D020A9EFF000E3D294 /* UIColor+ChineseTraditionalColors.swift */,
+				66CDD3C820A9C46D00E3D294 /* UIView+Rx+Help.swift */,
 				669EDC37209F1C83006BCDC8 /* UIViewController+Help.swift */,
 				66A6C6551DD2F3820001F5FB /* UsageUtility.swift */,
 				669EDC3D209F715C006BCDC8 /* UserDefaultsHelp.swift */,
 				669EDC39209F1ECB006BCDC8 /* ViewController.swift */,
 				66FF0D001DD1787F00C16858 /* Assets.xcassets */,
 				66FF0D111DD1EA1100C16858 /* Resource */,
+				6602019720B1E1A900FE764D /* UIColor+Help.swift */,
 			);
 			path = SwiftQRCodeScan;
 			sourceTree = "<group>";
@@ -135,6 +152,7 @@
 		66FF0D111DD1EA1100C16858 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				66CDD3CC20A9E3BD00E3D294 /* colors.json */,
 				66C188AA209D7AF30031136A /* fa-brands-400.ttf */,
 				66C188AB209D7AF30031136A /* fa-solid-900.ttf */,
 			);
@@ -205,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6690F5861E3116A5005FD0BF /* Launch Screen.storyboard in Resources */,
+				66CDD3CD20A9E3BD00E3D294 /* colors.json in Resources */,
 				66C188AD209D7AF30031136A /* fa-solid-900.ttf in Resources */,
 				66C188AC209D7AF30031136A /* fa-brands-400.ttf in Resources */,
 				66FF0D011DD1787F00C16858 /* Assets.xcassets in Resources */,
@@ -221,6 +240,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftQRCodeScan/Pods-SwiftQRCodeScan-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
@@ -229,12 +249,13 @@
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/WYKit/WYKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
@@ -243,9 +264,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WYKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -279,15 +300,20 @@
 			files = (
 				66A6C6581DD2FE960001F5FB /* HistoryDataCache.swift in Sources */,
 				66FF0D151DD2074600C16858 /* ShadowView.swift in Sources */,
+				66CDD3C920A9C46D00E3D294 /* UIView+Rx+Help.swift in Sources */,
 				66FF0CFA1DD1787F00C16858 /* AppDelegate.swift in Sources */,
 				669EDC38209F1C83006BCDC8 /* UIViewController+Help.swift in Sources */,
+				66CDD3D120A9EFF000E3D294 /* UIColor+ChineseTraditionalColors.swift in Sources */,
 				66C188A5209C58D40031136A /* IndexViewController.swift in Sources */,
+				66CDD3CB20A9CE8900E3D294 /* ColorSelectViewController.swift in Sources */,
 				66FF0D0C1DD17AE800C16858 /* ScanViewController.swift in Sources */,
 				66C188A9209D6D5D0031136A /* IconFont.swift in Sources */,
 				66000426209F865000D4A6B9 /* PreviewViewController.swift in Sources */,
 				66C188A7209D4F720031136A /* SettingViewController.swift in Sources */,
 				669EDC3E209F715C006BCDC8 /* UserDefaultsHelp.swift in Sources */,
+				66CDD3CF20A9E4FB00E3D294 /* CTColorView.swift in Sources */,
 				669EDC3A209F1ECB006BCDC8 /* ViewController.swift in Sources */,
+				6602019820B1E1A900FE764D /* UIColor+Help.swift in Sources */,
 				669EDC3C209F5147006BCDC8 /* Operators.swift in Sources */,
 				66FF0D0E1DD17B4D00C16858 /* HistoryViewController.swift in Sources */,
 				669EDC36209F0954006BCDC8 /* GenerateViewController.swift in Sources */,
@@ -414,6 +440,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = CY25956VB2;
 				INFOPLIST_FILE = SwiftQRCodeScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

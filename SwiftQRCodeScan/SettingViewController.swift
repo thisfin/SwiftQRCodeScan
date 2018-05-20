@@ -37,9 +37,9 @@ class SettingViewController: ViewController {
 
             cell.textLabel?.attributedText = NSMutableAttributedString(string: element).then {
                 if indexPath.section == 0 {
-                    $0.addAttribute(kCTFontAttributeName as NSAttributedStringKey, value: Iconfont.fontOfSize(20, fontInfo: Iconfont.brandsFont), range: NSRange.init(location: 0, length: 1))
+                    $0.addAttribute(kCTFontAttributeName as NSAttributedStringKey, value: Iconfont.fontOfSize(20, fontInfo: Iconfont.brandsFont), range: NSRange(location: 0, length: 1))
                 } else {
-                    $0.addAttribute(kCTFontAttributeName as NSAttributedStringKey, value: Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont), range: NSRange.init(location: 0, length: 1))
+                    $0.addAttribute(kCTFontAttributeName as NSAttributedStringKey, value: Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont), range: NSRange(location: 0, length: 1))
                 }
             }
             switch indexPath.section {

@@ -29,16 +29,17 @@ class IndexViewController: UIViewController {
             ControllerInfo(name: "设置", type: SettingViewController.self, icon: "\u{f013}")])])
 
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ControllerInfo>>(configureCell: { (dataSource, tableView, indexPath, element) -> UITableViewCell in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "\(IndexViewController.self)") ?? UITableViewCell(style: .value1, reuseIdentifier: "\(IndexViewController.self)")
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self)) ?? UITableViewCell(style: .value1, reuseIdentifier: String(describing: UITableViewCell.self))
             cell.selectionStyle = .none // 取消选中色
             cell.textLabel?.attributedText = NSMutableAttributedString(string: "\(element.icon)  \(element.name)").then {
-                $0.addAttribute(kCTFontAttributeName as NSAttributedStringKey, value: Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont), range: NSRange.init(location: 0, length: 1))
+                $0.addAttribute(kCTFontAttributeName as NSAttributedStringKey, value: Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont), range: NSRange(location: 0, length: 1))
             }
             cell.accessoryType = .disclosureIndicator
             return cell
         })
 
         let tableView = UITableView(frame: UIScreen.main.bounds, style: .plain).then {
+            $0.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
             $0.tableFooterView = UIView(frame: .zero) // 去除尾部空白行
             $0.bounces = false // 禁止超限滑动
             self.view.addSubview($0)

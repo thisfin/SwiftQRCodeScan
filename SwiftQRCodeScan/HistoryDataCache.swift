@@ -11,7 +11,7 @@ import Foundation
 class HistoryDataCache {
     private var cacheDirectoryPath: String?
     private var cacheDatas = [String]()
-    private static let selfInstance = HistoryDataCache.init()
+    private static let selfInstance = HistoryDataCache()
 
     // 单例范例
     public static var sharedInstance: HistoryDataCache {
@@ -96,10 +96,7 @@ private extension HistoryDataCache {
 
     private func removeCacheFile() {
         DispatchQueue.main.async { [weak self] () in
-            guard let strongSelf = self else {
-                return
-            }
-            if let fileName = strongSelf.fileName(), FileManager.default.fileExists(atPath: fileName) {
+            if let strongSelf = self, let fileName = strongSelf.fileName(), FileManager.default.fileExists(atPath: fileName) {
                 try? FileManager.default.removeItem(atPath: fileName)
             }
         }

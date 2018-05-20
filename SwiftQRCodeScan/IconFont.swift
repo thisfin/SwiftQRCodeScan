@@ -15,8 +15,9 @@ class Iconfont: NSObject {
     static func fontOfSize(_ fontSize: CGFloat, fontInfo: FontInfo) -> UIFont {
         _ = oneTimeThing
 
-        guard let font = UIFont.init(name: fontInfo.fontName, size: fontSize) else {
+        guard let font = UIFont(name: fontInfo.fontName, size: fontSize) else {
             assert(false, "\(fontInfo.fontName) couldn't be loaded")
+            return UIFont.systemFont(ofSize: UIFont.systemFontSize)
         }
         return font
     }

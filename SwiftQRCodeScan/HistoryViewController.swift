@@ -32,11 +32,8 @@ class HistoryViewController: ViewController {
             $0.titleLabel?.font = Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont)
             $0.setTitle("\u{f2ed}", for: .normal)
             $0.setTitleColor(UIColor.black, for: .normal)
-            $0.rx.tap.subscribe(onNext: { [weak self] () in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.present(UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .actionSheet).then {
+            $0.rx.tap.subscribe(onNext: { () in
+                self.present(UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .actionSheet).then {
                     $0.addAction(UIAlertAction(title: "确定", style: .default, handler: { [weak self] (action) in
                         guard let strongSelf = self else {
                             return
@@ -49,12 +46,17 @@ class HistoryViewController: ViewController {
             }).disposed(by: rx.disposeBag)
         })
 
-        tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
-        tableView.dataSource = self
-        tableView.delegate = self
-        self.view.addSubview(tableView)
-        tableView.snp.makeConstraints { (maker) in
-            maker.edges.equalToSuperview()
+        tableView = UITableView(frame: UIScreen.main.bounds, style: .plain).then {
+            $0.dataSource = self
+            $0.delegate = self
+            $0.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+            //            if #available(iOS 11.0, *) {
+            //                $0.contentInsetAdjustmentBehavior = .never
+            //            }
+            self.view.addSubview($0)
+            $0.snp.makeConstraints { (maker) in
+                maker.edges.equalToSuperview()
+            }
         }
     }
 
@@ -82,7 +84,7 @@ extension HistoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "") ?? UITableViewCell(style: .value1, reuseIdentifier: "")
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self)) ?? UITableViewCell(style: .value1, reuseIdentifier: String(describing: UITableViewCell.self))
         cell.textLabel?.text = HistoryDataCache.sharedInstance.getCacheValues()[indexPath.row]
         return cell
     }
