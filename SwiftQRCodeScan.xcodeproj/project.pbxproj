@@ -168,7 +168,6 @@
 			);
 			mainGroup = 66B7207B24AC3B500012B450;
 			packageReferences = (
-				669484F824AC925B00E11773 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				669484F924AC92E000E11773 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 66B7208524AC3B500012B450 /* Products */;
@@ -403,14 +402,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		669484F824AC925B00E11773 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:ReactiveX/RxSwift.git";
-			requirement = {
-				kind = exactVersion;
-				version = 5.1.1;
-			};
-		};
 		669484F924AC92E000E11773 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:devxoul/Then.git";
