@@ -19,13 +19,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>12</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>"码上扫"想访问您的相机, 用来扫描二维码, 建议开启</string>
+	<string>&quot;码上扫&quot;想访问您的相机, 用来扫描二维码, 建议开启</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>"码上扫"想访问您的相册, 用来扫描相册图片中的二维码, 建议开启</string>
+	<string>&quot;码上扫&quot;想访问您的相册, 用来扫描相册图片中的二维码, 建议开启</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -62,5 +62,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
