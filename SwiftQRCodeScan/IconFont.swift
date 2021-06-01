@@ -27,12 +27,12 @@ private extension Iconfont {
     // 字体库注册
     static var oneTimeThing: () = {
         let fonts = [solidFont, brandsFont]
-        fonts.forEach { (fontInfo) in
+        fonts.forEach { fontInfo in
             if let path = Bundle.main.path(forResource: fontInfo.fontPath, ofType: "ttf"),
-                let dynamicFontData = NSData(contentsOfFile: path),
-                let dataProvider = CGDataProvider(data: dynamicFontData),
-                let font = CGFont(dataProvider) {
-                var error: Unmanaged<CFError>? = nil
+               let dynamicFontData = NSData(contentsOfFile: path),
+               let dataProvider = CGDataProvider(data: dynamicFontData),
+               let font = CGFont(dataProvider) {
+                var error: Unmanaged<CFError>?
                 if !CTFontManagerRegisterGraphicsFont(font, &error) {
                     let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue())
                     NSLog("Failed to load font: %@", errorDescription as String)
@@ -44,6 +44,6 @@ private extension Iconfont {
 }
 
 struct FontInfo {
-    var fontName: String;
-    var fontPath: String;
+    var fontName: String
+    var fontPath: String
 }

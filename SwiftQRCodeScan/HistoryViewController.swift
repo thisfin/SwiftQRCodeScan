@@ -6,13 +6,12 @@
 //  Copyright © 2016年 wenyou. All rights reserved.
 //
 
-import UIKit
-import AVFoundation
 import AudioToolbox
+import AVFoundation
 import RxCocoa
-import RxSwift
 import RxDataSources
-
+import RxSwift
+import UIKit
 
 class HistoryViewController: ViewController {
     private var tableView: UITableView!
@@ -20,21 +19,21 @@ class HistoryViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "扫描记录"
+//        title = "扫描记录"
 
 //        self.automaticallyAdjustsScrollViewInsets = false               // scrollView 遮挡
 //        self.navigationController?.navigationBar.isTranslucent = false  // navigation 遮挡
 //        self.tabBarController?.tabBar.isTranslucent = false             // tabbar 遮挡
 //        self.edgesForExtendedLayout = []
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .custom).then {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .custom).then {
             $0.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
             $0.titleLabel?.font = Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont)
             $0.setTitle("\u{f2ed}", for: .normal)
             $0.setTitleColor(UIColor.black, for: .normal)
             $0.rx.tap.subscribe(onNext: { () in
                 self.present(UIAlertController(title: "确认全部删除", message: nil, preferredStyle: .actionSheet).then {
-                    $0.addAction(UIAlertAction(title: "确定", style: .default, handler: { [weak self] (action) in
+                    $0.addAction(UIAlertAction(title: "确定", style: .default, handler: { [weak self] _ in
                         guard let strongSelf = self else {
                             return
                         }
@@ -50,11 +49,8 @@ class HistoryViewController: ViewController {
             $0.dataSource = self
             $0.delegate = self
             $0.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
-            //            if #available(iOS 11.0, *) {
-            //                $0.contentInsetAdjustmentBehavior = .never
-            //            }
             self.view.addSubview($0)
-            $0.snp.makeConstraints { (maker) in
+            $0.snp.makeConstraints { maker in
                 maker.edges.equalToSuperview()
             }
         }
@@ -64,17 +60,14 @@ class HistoryViewController: ViewController {
         super.viewWillAppear(animated)
 
         tableView.reloadData()
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+
+//        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = false
-        }
+//        navigationController?.navigationBar.prefersLargeTitles = false
     }
 }
 
@@ -99,7 +92,7 @@ extension HistoryViewController: UITableViewDelegate {
         return "删除"
     }
 
-    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         HistoryDataCache.sharedInstance.deleteCacheValue(atIndex: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
     }

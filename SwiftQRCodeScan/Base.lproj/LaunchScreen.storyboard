@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rz5-aD-Sze">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="azH-Az-qYl">
+            <objects>
+                <viewController id="Rz5-aD-Sze" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eqC-3w-RVm"/>
+                        <viewControllerLayoutGuide type="bottom" id="w4h-6V-lXq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LD9-8J-dLe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright © 2021年 李毅. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Qpc-aF-gbO">
+                                <rect key="frame" x="20" y="835" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="码上扫" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Cp0-xU-Rm6">
+                                <rect key="frame" x="20" y="277" width="374" height="43"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vS1-Zq-TQL"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Qpc-aF-gbO" secondAttribute="centerX" id="0uO-Yu-0kW"/>
+                            <constraint firstItem="Cp0-xU-Rm6" firstAttribute="centerY" secondItem="LD9-8J-dLe" secondAttribute="bottom" multiplier="1/3" id="5o6-7r-kBp"/>
+                            <constraint firstItem="Qpc-aF-gbO" firstAttribute="leading" secondItem="LD9-8J-dLe" secondAttribute="leading" constant="20" symbolic="YES" id="Mbs-qq-En7"/>
+                            <constraint firstAttribute="bottom" secondItem="Qpc-aF-gbO" secondAttribute="bottom" constant="40" id="NY5-0w-9yp"/>
+                            <constraint firstAttribute="centerX" secondItem="Cp0-xU-Rm6" secondAttribute="centerX" id="aLy-pc-SHF"/>
+                            <constraint firstItem="Cp0-xU-Rm6" firstAttribute="leading" secondItem="LD9-8J-dLe" secondAttribute="leading" constant="20" symbolic="YES" id="x0u-vh-Yxs"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2kK-Dr-xFC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+</document>

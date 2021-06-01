@@ -17,12 +17,12 @@ class ShadowView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 80)
+        backgroundColor = UIColor(hex: 0x000000, alpha: 80 / 255)
 
         let outPath: UIBezierPath = UIBezierPath(rect: frame)
         let size = UIScreen.main.bounds.size // frame.size
         let width = size.width - 50 * 2
-        let inPath = UIBezierPath(rect: CGRect.init(x: 50, y: (size.height - width) / 2, width: width, height: width)).reversing()
+        let inPath = UIBezierPath(rect: CGRect(x: 50, y: (size.height - width) / 2, width: width, height: width)).reversing()
         outPath.append(inPath)
         outPath.usesEvenOddFillRule = true
         let shapeLayer = CAShapeLayer()
@@ -37,7 +37,7 @@ class ShadowView: UIView {
         let size = UIScreen.main.bounds.size // frame.size
         let width: CGFloat = size.width - (CGFloat)(50 * 2)
         let path = UIBezierPath()
-        Constants.colorBianchi.setStroke()
+        UIColor(hex: 0x8BDDD1).setStroke()
         path.lineWidth = 4
 
         path.move(to: CGPoint(x: 50 - lineWidth / 2, y: (size.height - width) / 2 + lineLength))

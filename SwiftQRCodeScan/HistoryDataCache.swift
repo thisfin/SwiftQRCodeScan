@@ -35,6 +35,7 @@ class HistoryDataCache {
     }
 
     // MARK: - public
+
     public func addCacheValue(_ value: String) {
         cacheDatas.insert(value, at: 0)
         writeCacheFile()
@@ -65,10 +66,10 @@ private extension HistoryDataCache {
 
     private func readCacheFile() -> [String] {
         if let fileName = fileName(),
-            FileManager.default.fileExists(atPath: fileName),
-            let data: Data = try? Data(contentsOf: URL(fileURLWithPath: fileName), options: .mappedIfSafe),
-            data.count > 0,
-            let array = (try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String] {
+           FileManager.default.fileExists(atPath: fileName),
+           let data: Data = try? Data(contentsOf: URL(fileURLWithPath: fileName), options: .mappedIfSafe),
+           data.count > 0,
+           let array = (try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)) as? [String] {
             return array
         }
         return []

@@ -2,23 +2,23 @@
 //  AppDelegate.swift
 //  SwiftQRCodeScan
 //
-//  Created by wenyou on 2016/11/8.
-//  Copyright © 2016年 wenyou. All rights reserved.
+//  Created by 李毅 on 2021/6/1.
 //
 
 import UIKit
-import Then
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds).then {
-            $0.backgroundColor = .white
-            $0.rootViewController = UINavigationController(rootViewController: IndexViewController())
-            $0.makeKeyAndVisible()
-        }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true
+    }
+
+    // MARK: UISceneSession Lifecycle
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
     }
 }

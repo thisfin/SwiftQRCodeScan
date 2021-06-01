@@ -6,14 +6,13 @@
 //  Copyright © 2016年 wenyou. All rights reserved.
 //
 
-import UIKit
-import AVFoundation
 import AudioToolbox
-import SnapKit
-import Toast_Swift
+import AVFoundation
+import NSObject_Rx
 import RxCocoa
 import RxSwift
-import NSObject_Rx
+import SnapKit
+import UIKit
 
 class ScanViewController: ViewController, UINavigationControllerDelegate {
     private var device: AVCaptureDevice!
@@ -26,9 +25,9 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.setNeedsStatusBarAppearanceUpdate()
+        edgesForExtendedLayout = .all
 
-        NotificationCenter.default.rx.notification(Notification.Name.UIApplicationWillEnterForeground).subscribe(onNext: { (notification) in
+        NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification).subscribe(onNext: { _ in
             if self.supportCamera {
                 self.session.startRunning()
             }
@@ -39,26 +38,22 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
             $0.isHidden = false
         }
         view.addSubview(bgView)
-        bgView.snp.makeConstraints { (maker) in
+        bgView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
 
         let shadowView = ShadowView(frame: view.bounds)
         view.addSubview(shadowView)
-        shadowView.snp.makeConstraints { (maker) in
-            if #available(iOS 11.0, *) {
-                maker.top.left.right.equalTo(self.view)
-                maker.bottom.equalTo(self.view.safeAreaInsets.bottom)
-            } else {
-                maker.edges.equalTo(self.view)
-            }
+        shadowView.snp.makeConstraints { maker in
+            maker.top.left.right.equalTo(self.view)
+            maker.bottom.equalTo(self.view.safeAreaInsets.bottom)
         }
 
         let imageButton = UIButton(type: .custom).then {
             $0.layer.cornerRadius = 20
             $0.clipsToBounds = true
             $0.titleLabel?.font = Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont)
-            $0.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
+            $0.backgroundColor = UIColor(hex: 0x000000, alpha: 32 / 255)
             $0.setTitle("\u{f03e}", for: .normal)
             $0.rx.tap.subscribe(onNext: { () in
                 if UsageUtility.checkPhoto(controller: self) {
@@ -72,7 +67,7 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
             }).disposed(by: rx.disposeBag)
         }
         shadowView.addSubview(imageButton)
-        imageButton.snp.makeConstraints { (make) in
+        imageButton.snp.makeConstraints { make in
             make.right.bottom.equalToSuperview().offset(-20)
             make.height.width.equalTo(40)
         }
@@ -81,7 +76,7 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
             $0.layer.cornerRadius = 20
             $0.clipsToBounds = true
             $0.titleLabel?.font = Iconfont.fontOfSize(20, fontInfo: Iconfont.solidFont)
-            $0.backgroundColor = UIColor.colorWithHexValue(0x000000, alpha: 32)
+            $0.backgroundColor = UIColor(hex: 0x000000, alpha: 32 / 255)
             $0.setTitle("\u{f0e7}", for: .normal)
             $0.rx.tap.subscribe(onNext: { () in
                 try! self.device.lockForConfiguration()
@@ -94,26 +89,32 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
                     break
                 case .auto:
                     self.device.torchMode = .on
+                @unknown default:
+                    ()
                 }
                 self.device.unlockForConfiguration()
                 self.setLightButtonStyle()
             }).disposed(by: rx.disposeBag)
         }
         shadowView.addSubview(lightButton)
-        lightButton.snp.makeConstraints { (make) in
+        lightButton.snp.makeConstraints { make in
             make.right.equalTo(imageButton.snp.left).offset(-20)
             make.bottom.height.width.equalTo(imageButton)
         }
     }
 
+//    override var prefersStatusBarHidden: Bool {
+//        true
+//    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // 隐藏 navigationBar
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.isTranslucent = true
+//        setNeedsStatusBarAppearanceUpdate()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -139,17 +140,14 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+//        navigationController?.navigationBar.isTranslucent = false
+//        setNeedsStatusBarAppearanceUpdate()
 
         if let session = session {
             session.stopRunning()
         }
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 
     static func handleValue(_ value: String, viewController: UIViewController, endBlock: (() -> Void)?) {
@@ -158,17 +156,17 @@ class ScanViewController: ViewController, UINavigationControllerDelegate {
         }
         viewController.present(UIAlertController(title: value, message: nil, preferredStyle: .actionSheet).then {
             if let url = URL(string: value), UIApplication.shared.canOpenURL(url) {
-                $0.addAction(UIAlertAction(title: "用浏览器打开", style: .default, handler: { (action) in
+                $0.addAction(UIAlertAction(title: "用浏览器打开", style: .default, handler: { _ in
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }))
             }
-            $0.addAction(UIAlertAction(title: "拷贝到剪贴板", style: .default, handler: { (action) in
+            $0.addAction(UIAlertAction(title: "拷贝到剪贴板", style: .default, handler: { _ in
                 UIPasteboard.general.string = value
                 if let block = endBlock {
                     block()
                 }
             }))
-            $0.addAction(UIAlertAction(title: "继续", style: .cancel, handler: { (action) in
+            $0.addAction(UIAlertAction(title: "继续", style: .cancel, handler: { _ in
                 if let block = endBlock {
                     block()
                 }
@@ -211,6 +209,8 @@ private extension ScanViewController {
             lightButton.setTitleColor(UIColor.white, for: .normal)
         case .auto:
             lightButton.setTitleColor(UIColor.yellow, for: .normal)
+        @unknown default:
+            ()
         }
     }
 }
@@ -233,11 +233,16 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
 }
 
 extension ScanViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) -> Void {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.view.makeToastActivity(.center)
-        let pickImage: UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        let ciImage: CIImage = CIImage(data: UIImagePNGRepresentation(pickImage)!)!
-        let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])!
+
+        guard let pickImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
+              let data = pickImage.pngData(),
+              let ciImage = CIImage(data: data),
+              let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow]) else {
+            return
+        }
+
         let features: [CIFeature] = detector.features(in: ciImage)
         picker.view.hideToastActivity()
 

@@ -6,9 +6,9 @@
 //  Copyright © 2016年 wenyou. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import Photos
+import UIKit
 
 class UsageUtility {
     public static func isCameraAvailable() -> Bool {
@@ -29,15 +29,15 @@ class UsageUtility {
         if !UsageUtility.isCameraAvailable() {
             controller.present(
                 UIAlertController(title: "摄像头不可用", message: nil, preferredStyle: .alert).then {
-                $0.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
-            }, animated: true, completion: nil)
+                    $0.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                }, animated: true, completion: nil)
             return false
         }
         if !UsageUtility.isAVAuthorization() {
             controller.present(
                 UIAlertController(title: "未获得授权使用摄像头", message: "请在\"设置\"-\"隐私\"-\"相机\"中打开", preferredStyle: .alert).then {
-                $0.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
-            }, animated: true, completion: nil)
+                    $0.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                }, animated: true, completion: nil)
             return false
         }
         return true

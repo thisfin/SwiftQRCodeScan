@@ -9,17 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // 坐标让过 navigationBar
+        edgesForExtendedLayout = []
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.backButtonTitle = nil
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        self.navigationController?.navigationBar.isTranslucent = true
     }
+
+//    override var prefersStatusBarHidden: Bool {
+//        false
+//    }
 }
