@@ -1,0 +1,191 @@
+[
+  {
+    "character" : 9,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Utils\/Tool.swift",
+    "line" : 37,
+    "reason" : "Setter value is not used.",
+    "rule_id" : "unused_setter_value",
+    "severity" : "Warning",
+    "type" : "Unused Setter Value"
+  },
+  {
+    "character" : 9,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Utils\/Tool.swift",
+    "line" : 45,
+    "reason" : "Setter value is not used.",
+    "rule_id" : "unused_setter_value",
+    "severity" : "Warning",
+    "type" : "Unused Setter Value"
+  },
+  {
+    "character" : 20,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Utils\/UserDefaultsWrapper.swift",
+    "line" : 32,
+    "reason" : "Variable name should be between 3 and 40 characters long: 't'",
+    "rule_id" : "identifier_name",
+    "severity" : "Error",
+    "type" : "Identifier Name"
+  },
+  {
+    "character" : 76,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Utils\/UserDefaultsWrapper.swift",
+    "line" : 42,
+    "reason" : "Shorthand syntactic sugar should be used, i.e. Int? instead of Optional<Int>.",
+    "rule_id" : "syntactic_sugar",
+    "severity" : "Warning",
+    "type" : "Syntactic Sugar"
+  },
+  {
+    "character" : 9,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Utils\/UIColor+Tool.swift",
+    "line" : 32,
+    "reason" : "Variable name should be between 3 and 40 characters long: 'r'",
+    "rule_id" : "identifier_name",
+    "severity" : "Error",
+    "type" : "Identifier Name"
+  },
+  {
+    "character" : 9,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Utils\/UIColor+Tool.swift",
+    "line" : 32,
+    "reason" : "Variable name should be between 3 and 40 characters long: 'g'",
+    "rule_id" : "identifier_name",
+    "severity" : "Error",
+    "type" : "Identifier Name"
+  },
+  {
+    "character" : 9,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Utils\/UIColor+Tool.swift",
+    "line" : 32,
+    "reason" : "Variable name should be between 3 and 40 characters long: 'b'",
+    "rule_id" : "identifier_name",
+    "severity" : "Error",
+    "type" : "Identifier Name"
+  },
+  {
+    "character" : 14,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/PreviewViewController.swift",
+    "line" : 20,
+    "reason" : "Function body should span 40 lines or less excluding comments and whitespace: currently spans 42 lines",
+    "rule_id" : "function_body_length",
+    "severity" : "Warning",
+    "type" : "Function Body Length"
+  },
+  {
+    "character" : 30,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/Operators.swift",
+    "line" : 86,
+    "reason" : "Variable name should be between 3 and 40 characters long: 'n'",
+    "rule_id" : "identifier_name",
+    "severity" : "Error",
+    "type" : "Identifier Name"
+  },
+  {
+    "character" : 14,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/SettingViewController.swift",
+    "line" : 23,
+    "reason" : "Function body should span 40 lines or less excluding comments and whitespace: currently spans 53 lines",
+    "rule_id" : "function_body_length",
+    "severity" : "Warning",
+    "type" : "Function Body Length"
+  },
+  {
+    "character" : 52,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/SettingViewController.swift",
+    "line" : 64,
+    "reason" : "Variable name should be between 3 and 40 characters long: 'i'",
+    "rule_id" : "identifier_name",
+    "severity" : "Error",
+    "type" : "Identifier Name"
+  },
+  {
+    "character" : 8,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ShadowView.swift",
+    "line" : 16,
+    "reason" : "TODOs should be resolved (init 和 draw 中的 size 不同, 暂且用 sc...).",
+    "rule_id" : "todo",
+    "severity" : "Warning",
+    "type" : "Todo"
+  },
+  {
+    "character" : 14,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/GenerateViewController.swift",
+    "line" : 38,
+    "reason" : "Function body should span 40 lines or less excluding comments and whitespace: currently spans 85 lines",
+    "rule_id" : "function_body_length",
+    "severity" : "Warning",
+    "type" : "Function Body Length"
+  },
+  {
+    "character" : null,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/GenerateViewController.swift",
+    "line" : 185,
+    "reason" : "Line should be 255 characters or less: currently 264 characters",
+    "rule_id" : "line_length",
+    "severity" : "Warning",
+    "type" : "Line Length"
+  },
+  {
+    "character" : 93,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ScanViewController.swift",
+    "line" : 222,
+    "reason" : "Force casts should be avoided.",
+    "rule_id" : "force_cast",
+    "severity" : "Warning",
+    "type" : "Force Cast"
+  },
+  {
+    "character" : 63,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ScanViewController.swift",
+    "line" : 251,
+    "reason" : "Force casts should be avoided.",
+    "rule_id" : "force_cast",
+    "severity" : "Warning",
+    "type" : "Force Cast"
+  },
+  {
+    "character" : 17,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ScanViewController.swift",
+    "line" : 82,
+    "reason" : "Force tries should be avoided.",
+    "rule_id" : "force_try",
+    "severity" : "Error",
+    "type" : "Force Try"
+  },
+  {
+    "character" : 25,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ScanViewController.swift",
+    "line" : 182,
+    "reason" : "Force tries should be avoided.",
+    "rule_id" : "force_try",
+    "severity" : "Error",
+    "type" : "Force Try"
+  },
+  {
+    "character" : 14,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ScanViewController.swift",
+    "line" : 25,
+    "reason" : "Function body should span 40 lines or less excluding comments and whitespace: currently spans 61 lines",
+    "rule_id" : "function_body_length",
+    "severity" : "Warning",
+    "type" : "Function Body Length"
+  },
+  {
+    "character" : 21,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ScanViewController.swift",
+    "line" : 86,
+    "reason" : "Avoid using unneeded break statements.",
+    "rule_id" : "unneeded_break_in_switch",
+    "severity" : "Warning",
+    "type" : "Unneeded Break in Switch"
+  },
+  {
+    "character" : 21,
+    "file" : "\/Users\/wenyou\/Documents\/GitHub\/SwiftQRCodeScan\/SwiftQRCodeScan\/ScanViewController.swift",
+    "line" : 89,
+    "reason" : "Avoid using unneeded break statements.",
+    "rule_id" : "unneeded_break_in_switch",
+    "severity" : "Warning",
+    "type" : "Unneeded Break in Switch"
+  }
+]
